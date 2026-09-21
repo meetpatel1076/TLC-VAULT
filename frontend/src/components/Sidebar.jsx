@@ -75,7 +75,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
             border border-[#30343d]
             flex items-center
             text-[#e5e7eb]
-            hover:bg-[#191c22]
+            bg-[#f64f12]
             transition
             ${collapsed
               ? "w-full justify-center"

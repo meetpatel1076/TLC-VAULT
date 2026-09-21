@@ -3,7 +3,7 @@ import WarpText from "./WarpText";
 
 const Header = () => {
   return (
-    <main className="min-h-screen bg-transparent">
+    <main className=" bg-transparent">
 
       <div className="w-full px-10 pt-10">
 

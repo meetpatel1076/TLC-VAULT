@@ -1,12 +1,31 @@
-import React from 'react'
-import HomePage from './pages/HomePage'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+
+import HomePage from "./pages/HomePage";
+import ProjectPage from "./pages/ProjectPage";
+import Layout from "./layout/layout";
+
 
 const App = () => {
   return (
-    <div>
-      <HomePage/>
-    </div>
-  )
-}
+    <Routes>
 
-export default App
+      <Route element={<Layout/>}>
+
+        <Route
+          path="/dashboard"
+          element={<HomePage />}
+        />
+
+        <Route
+          path="/repo"
+          element={<ProjectPage />}
+        />
+
+      </Route>
+
+    </Routes>
+  );
+};
+
+export default App;
