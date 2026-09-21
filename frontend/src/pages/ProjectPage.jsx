@@ -1,4 +1,5 @@
 import React from "react";
+import CodeEditor from "../components/CodeEditor";
 
 const ProjectPage = () => {
   return (
@@ -11,6 +12,7 @@ const ProjectPage = () => {
       <p className="mt-3 text-gray-400">
         This is your project page.
       </p>
+      <CodeEditor/>
 
     </main>
   );

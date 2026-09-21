@@ -11,7 +11,7 @@ const CreateProject = () => {
 
       <div
         className={`
-          w-full max-w-3xl
+          w-130 max-w-3xl
           rounded-2xl
           border border-[#30343d]
           bg-[#111318]/90

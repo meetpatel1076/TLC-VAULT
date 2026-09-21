@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Plus,
   Box,
@@ -7,17 +8,15 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const projects = [
-  "Portfolio Website",
-  "MERN Blog App",
-  "DSA Practice",
-  "Hackathon - VeriScan",
-  "College Notes",
-  "React UI Components",
+  "Portfolio Website"
+  
 ];
 
 const Sidebar = ({ collapsed, setCollapsed }) => {
+  const navigate =useNavigate()
   return (
     <aside
       className={`
@@ -41,7 +40,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
         {/* Logo */}
         <div className="flex items-center gap-3">
 
-          
+
 
           {!collapsed && (
             <span className="text-[17px] font-semibold text-white whitespace-nowrap">
@@ -70,6 +69,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       <div className={collapsed ? "px-3 mt-2" : "px-5 mt-2"}>
 
         <button
+        onClick={()=>navigate("/dashboard")}
           className={`
             h-[48px] rounded-xl
             border border-[#30343d]
@@ -97,60 +97,52 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       </div>
 
 
-      {/* Projects */}
-      <div className={`${collapsed ? "px-2" : "px-5"} mt-12`}>
+<div
+  className={`
+    mt-12 px-5
+    transition-all duration-300 ease-out
+    ${
+      collapsed
+        ? "opacity-0 -translate-x-3 pointer-events-none"
+        : "opacity-100 translate-x-0"
+    }
+  `}
+>
+  <p className="px-3 mb-4 text-[14px] font-medium text-[#9ca3af]">
+    Projects
+  </p>
 
-        {!collapsed && (
-          <p className="px-3 mb-4 text-[14px] font-medium text-[#9ca3af]">
-            Projects
-          </p>
-        )}
+  <div className="space-y-1">
 
-        <div className="space-y-1">
+    {projects.map((project, index) => (
+      <button
+        key={project}
+        className={`
+          w-full
+          rounded-xl
+          text-[15px]
+          text-left
+          px-4 py-3
+          transition-colors duration-200
 
-          {projects.map((project, index) => (
+          ${
+            index === 0
+              ? "bg-[#20232b] text-white border border-[#2d313a]"
+              : "text-[#9ca3af] hover:bg-[#191c22] hover:text-white"
+          }
+        `}
+      >
+        {project}
+      </button>
+    ))}
 
-            <button
-              key={project}
-              title={collapsed ? project : ""}
-              className={`
-                w-full
-                rounded-xl
-                text-[15px]
-                transition
-                flex items-center
-                ${collapsed
-                  ? "justify-center h-[44px]"
-                  : "text-left px-4 py-3"
-                }
-                ${
-                  index === 0
-                    ? "bg-[#20232b] text-white border border-[#2d313a]"
-                    : "text-[#9ca3af] hover:bg-[#191c22] hover:text-white"
-                }
-              `}
-            >
+  </div>
 
-              {collapsed ? (
-              <div></div>
-              ) : (
-                project
-              )}
-
-            </button>
-
-          ))}
-
-        </div>
-
-        {!collapsed && (
-          <button className="mt-4 px-3 flex items-center gap-2 text-[14px] text-[#9ca3af] hover:text-white transition">
-            Show more
-            <ChevronDown size={15} />
-          </button>
-        )}
-
-      </div>
+  <button className="mt-4 px-3 flex items-center gap-2 text-[14px] text-[#9ca3af] hover:text-white transition-colors">
+    Show more
+    <ChevronDown size={15} />
+  </button>
+</div>
 
 
       {/* User */}
@@ -187,7 +179,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
                 </p>
               </div>
 
-              
+
             </>
           )}
 
