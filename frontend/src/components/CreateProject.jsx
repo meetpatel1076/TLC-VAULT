@@ -1,10 +1,46 @@
 import React, { useState } from "react";
 import { Plus, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 
-const CreateProject = () => {
+const CreateProject = ({ fetchProjects }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const handleCreateProject = async () => {
+    if (!title.trim()) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const response = await api.post("/repositories", {
+        name: title.trim(),
+        description: description.trim(),
+      });
+
+      const newProject = response.data.repository;
+
+      console.log("CREATED PROJECT:", newProject);
+
+      // Refresh sidebar
+      await fetchProjects();
+
+      // Go to the newly created project
+      navigate(`/repo/${newProject._id}`);
+
+    } catch (error) {
+      console.error(
+        "Failed to create project:",
+        error.response?.data || error
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="px-10 pb-10 flex justify-center">
@@ -64,16 +100,18 @@ const CreateProject = () => {
               <input
                 type="text"
                 placeholder="e.g. Portfolio Website"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 className="
-                  w-full h-11 px-4
-                  rounded-lg
-                  border border-[#30343d]
-                  bg-[#0e1015]
-                  text-white
-                  placeholder:text-[#666b75]
-                  outline-none
-                  focus:border-[#555b66]
-                "
+    w-full h-11 px-4
+    rounded-lg
+    border border-[#30343d]
+    bg-[#0e1015]
+    text-white
+    placeholder:text-[#666b75]
+    outline-none
+    focus:border-[#555b66]
+  "
               />
             </div>
 
@@ -87,35 +125,40 @@ const CreateProject = () => {
               <textarea
                 rows={4}
                 placeholder="What is this project about?"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 className="
-                  w-full px-4 py-3
-                  rounded-lg
-                  border border-[#30343d]
-                  bg-[#0e1015]
-                  text-white
-                  placeholder:text-[#666b75]
-                  outline-none
-                  resize-none
-                  focus:border-[#555b66]
-                "
+    w-full px-4 py-3
+    rounded-lg
+    border border-[#30343d]
+    bg-[#0e1015]
+    text-white
+    placeholder:text-[#666b75]
+    outline-none
+    resize-none
+    focus:border-[#555b66]
+  "
               />
             </div>
 
 
             {/* Create */}
             <button
+              disabled={loading}
               className="
-                h-10 px-5
-                rounded-lg
-                bg-[#f64f12]
-                text-black
-                text-sm font-medium
-                hover:bg-[#f36631]
-                transition
-              "
-              onClick={()=>navigate("/repo")}
+    h-10 px-5
+    rounded-lg
+    bg-[#f64f12]
+    text-black
+    text-sm font-medium
+    hover:bg-[#f36631]
+    transition
+    disabled:opacity-60
+    disabled:cursor-not-allowed
+  "
+              onClick={handleCreateProject}
             >
-              Create Project
+              {loading ? "Creating..." : "Create Project"}
             </button>
 
           </div>

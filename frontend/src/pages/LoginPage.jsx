@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "";
+import api from "../services/api";
 
 export default function LoginPage() {
   const [form, setForm] = useState({
@@ -33,28 +33,20 @@ export default function LoginPage() {
       setLoading(true);
       setError("");
 
-      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          email: form.email.trim(),
-          password: form.password,
-        }),
+      const response = await api.post("/auth/login", {
+        email: form.email.trim(),
+        password: form.password,
       });
 
-      const data = await response.json();
+      console.log("LOGIN RESPONSE:", response.data);
 
-      if (!response.ok) {
-        throw new Error(data.message || "Unable to sign in.");
-      }
+      window.location.href = "/dashboard";
 
-      // Change this to your dashboard route when routing is connected.
-      window.location.href = "/";
     } catch (err) {
-      setError(err.message || "Something went wrong.");
+      setError(
+        err.response?.data?.message ||
+        "Unable to sign in."
+      );
     } finally {
       setLoading(false);
     }

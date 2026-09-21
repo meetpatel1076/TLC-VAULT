@@ -20,7 +20,7 @@ const App = () => {
         />
 
         <Route
-          path="/repo"
+          path="/repo/:repoId"
           element={<ProjectPage />}
         />
 
