@@ -6,6 +6,8 @@ import ProjectPage from "./pages/ProjectPage";
 import Layout from "./layout/layout";
 import Login from "./pages/LoginPage"
 import SignupPage from "./pages/SignupPage";
+import SignupPage from "./pages/SignupPage";
+import IndexPage from "./pages/Index";
 
 
 const App = () => {
@@ -34,6 +36,11 @@ const App = () => {
       <Route
         path="/register"
         element={<SignupPage />}
+      />
+
+      <Route
+        path="/"
+        element={<IndexPage />}
       />
 
     </Routes>
