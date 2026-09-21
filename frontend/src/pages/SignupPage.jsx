@@ -80,11 +80,10 @@ export default function SignupPage() {
             <div className="absolute left-[-5%] top-[73%] h-36 w-[110%] rotate-[4deg] rounded-[50%] border-t border-[#f36631]/10 bg-zinc-950" />
           </div>
 
-          {/* brand */}
+          {/* Brand */}
           <div className="absolute left-7 top-7 z-10 flex items-center gap-3 sm:left-9 sm:top-9">
-            <div className="grid h-9 w-9 place-items-center rounded-lg border border-[#f6f1e8]/70 text-sm font-bold text-[#f36631]">
-              &gt;_
-            </div>
+            <img className="h-14" src="tlc-vault-logo.png" alt="" />
+
             <span className="text-base font-semibold tracking-tight">
               TLC Vault
             </span>
