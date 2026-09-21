@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "";
+import api from "../services/api";
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -34,29 +34,21 @@ export default function SignupPage() {
       setLoading(true);
       setError("");
 
-      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          name: form.name.trim(),
-          email: form.email.trim(),
-          password: form.password,
-        }),
+      const response = await api.post("/auth/register", {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        password: form.password,
       });
 
-      const data = await response.json();
+      console.log("SIGNUP RESPONSE:", response.data);
 
-      if (!response.ok) {
-        throw new Error(data.message || "Unable to create account.");
-      }
+      window.location.href = "/dashboard";
 
-      // Change this route to your dashboard route when routing is connected.
-      window.location.href = "/";
     } catch (err) {
-      setError(err.message || "Something went wrong.");
+      setError(
+        err.response?.data?.message ||
+        "Unable to create account."
+      );
     } finally {
       setLoading(false);
     }
