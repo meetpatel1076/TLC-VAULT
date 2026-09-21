@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 import { Save, Trash2 } from "lucide-react";
 import api from "../services/api";
+import HoldButton from "./HoldButton";
 
 const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
   const [code, setCode] = useState(file.code || "");
@@ -64,17 +65,21 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-[#9ca3af] hover:text-white hover:bg-[#191c22] transition disabled:opacity-50"
           >
             <Save size={16} />
-            {saving ? "Saving..." : "Save"}
+            {saving ? "updating..." : "Update"}
           </button>
 
-          <button
-            onClick={handleDelete}
-            disabled={deleting}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-red-400 hover:text-red-300 hover:bg-[#191c22] transition disabled:opacity-50"
-          >
-            <Trash2 size={16} />
-            {deleting ? "Deleting..." : "Delete"}
-          </button>
+         <HoldButton
+  onHold={handleDelete}
+  disabled={deleting}
+  holdTime={1500}
+  backgroundColor="#191c22"
+  fillColor="#FF0000"
+  textColor="#9ca3af"
+  fillTextColor="#ffffff"
+  size="sm"
+>
+  Delete
+</HoldButton>
         </div>
 
       </div>
