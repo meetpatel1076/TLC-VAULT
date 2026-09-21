@@ -1,43 +1,25 @@
-import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+import React from "react";
 import Header from "../components/Header";
 import DotField from "../bg/DotField";
+import CreateProject from "../components/CreateProject";
 
 const HomePage = () => {
-    const [collapsed, setCollapsed] = useState(false);
+  return (
+    <div className="relative min-h-screen overflow-hidden">
 
-    return (
-        <div className="min-h-screen bg-[#0e1015]">
+      {/* Background */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <DotField />
+      </div>
 
-            <Sidebar
-                collapsed={collapsed}
-                setCollapsed={setCollapsed}
-            />
+      {/* Content */}
+      <div className="relative z-10">
+        <Header />
+        <CreateProject />
+      </div>
 
-            {/* RIGHT SIDE */}
-            <div
-                className={`
-          relative min-h-screen overflow-hidden transition-all duration-300
-          ${collapsed ? "ml-[72px]" : "ml-[300px]"}
-        `}
-            >
-
-                {/* Background */}
-                <div className="absolute inset-0 w-full h-full z-0">
-                    <DotField />
-                </div>
-
-                {/* Content */}
-                <div className="relative z-10">
-                    <Topbar collapsed={collapsed} />
-                    <Header />
-                </div>
-
-            </div>
-
-        </div>
-    );
+    </div>
+  );
 };
 
 export default HomePage;

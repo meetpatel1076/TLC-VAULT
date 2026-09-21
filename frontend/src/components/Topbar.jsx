@@ -11,6 +11,7 @@ const Topbar = ({ collapsed }) => {
         bg-[#0e1015]
         flex items-center justify-end px-7
         transition-all duration-300
+        z-50
         ${collapsed ? "left-[72px]" : "left-[300px]"}
       `}
         >
