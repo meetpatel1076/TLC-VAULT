@@ -7,12 +7,30 @@ import {
   MoreVertical,
   PanelLeftClose,
   PanelLeftOpen,
+  LogOut,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import SwipeRow from "./Swiper";
+import api from "../services/api";
 
 
 const Sidebar = ({ collapsed, setCollapsed, projects }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [loggingOut, setLoggingOut] = React.useState(false);
+
+  const handleLogout = async () => {
+  if (loggingOut) return;
+
+  try {
+    setLoggingOut(true);
+
+    await api.post("/auth/logout");
+  } catch (error) {
+    console.error("Logout error:", error);
+  } finally {
+    navigate("/login", { replace: true });
+  }
+};
   return (
     <aside
       className={`
@@ -39,7 +57,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects }) => {
 
 
           {!collapsed && (
-            <span className="text-[17px] font-semibold text-white whitespace-nowrap">
+            <span className="text-[17px] font-bold text-white whitespace-nowrap" style={{fontFamily: "monospace"}}> 
               TLC Vault
             </span>
           )}
@@ -114,14 +132,14 @@ const Sidebar = ({ collapsed, setCollapsed, projects }) => {
         ) : (
           <div className="space-y-1">
             {projects.map((project) => {
-  const isSelected =
-    location.pathname === `/repo/${project._id}`;
+              const isSelected =
+                location.pathname === `/repo/${project._id}`;
 
-  return (
-    <button
-      key={project._id}
-      onClick={() => navigate(`/repo/${project._id}`)}
-      className={`
+              return (
+                <button
+                  key={project._id}
+                  onClick={() => navigate(`/repo/${project._id}`)}
+                  className={`
         w-full
         rounded-xl
         text-[15px]
@@ -129,17 +147,16 @@ const Sidebar = ({ collapsed, setCollapsed, projects }) => {
         px-4 py-3
         transition-all duration-200
 
-        ${
-          isSelected
-            ? "bg-[#20232b] text-white border border-[#2d313a]"
-            : "text-[#9ca3af] hover:bg-[#191c22] hover:text-white"
-        }
+        ${isSelected
+                      ? "bg-[#20232b] text-white border border-[#2d313a]"
+                      : "text-[#9ca3af] hover:bg-[#191c22] hover:text-white"
+                    }
       `}
-    >
-      {project.name}
-    </button>
-  );
-})}
+                >
+                  {project.name}
+                </button>
+              );
+            })}
           </div>
         )}
 
@@ -157,6 +174,44 @@ const Sidebar = ({ collapsed, setCollapsed, projects }) => {
           ${collapsed ? "px-3" : "px-5"}
         `}
       >
+
+        {/* Logout swipe action */}
+        {!collapsed && (
+          <SwipeRow
+            actions={[
+              {
+                id: "logout",
+                label: loggingOut ? "Logging out..." : "Logout",
+                icon: <LogOut size={19} strokeWidth={2} />,
+              },
+            ]}
+            onCommit={handleLogout}
+            actionColor="#f36631"
+            drawerColor="#3f3f46"
+            rowColor="#27272a"
+            textColor="#f5f5f5"
+            height={52}
+            radius={12}
+            actionWidth={88}
+            direction="left"
+            snapBounce={0.2}
+            resistance={0.55}
+            collapseMs={200}
+            commitAt={0.6}
+            fullSwipe
+            disabled={loggingOut}
+            label="Logout"
+            style={{ marginBottom: 10 }}
+          >
+            <div className="flex w-full items-center justify-between">
+              <span className="text-sm text-zinc-300">
+                Swipe to log out
+              </span>
+              <span className="text-xs text-zinc-500">←</span>
+            </div>
+          </SwipeRow>
+        )}
+
 
         <div
           className={`

@@ -61,7 +61,7 @@ export default function LoginPage() {
 
           {/* Replace /tlc-login-bg.jpg with your preferred image */}
           <img
-            src="/tlc-login-bg.jpg"
+            src="/tlc-login-bg.png"
             alt=""
             className="absolute inset-0 h-full w-full object-cover"
           />
@@ -77,9 +77,7 @@ export default function LoginPage() {
 
           {/* Brand */}
           <div className="absolute left-7 top-7 z-10 flex items-center gap-3 sm:left-9 sm:top-9">
-            <div className="grid h-9 w-9 place-items-center rounded-lg border border-[#f6f1e8]/70 text-sm font-bold text-[#f36631]">
-              &gt;_
-            </div>
+            <img className="h-14" src="tlc-vault-logo.png" alt="" />
 
             <span className="text-base font-semibold tracking-tight">
               TLC Vault
