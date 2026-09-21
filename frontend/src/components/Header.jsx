@@ -8,8 +8,8 @@ const Header = () => {
       <div className="w-full px-10 pt-10">
 
         <WarpText
-          text="TLC VAULT"
-          color="#f8f5ff"
+          text="TLC Vault"
+          color="#f6f1e8"
           warpStrength={0.07}
           warpScale={1}
           speed={0.55}
@@ -17,11 +17,11 @@ const Header = () => {
           pointerStrength={0.38}
           refraction={0.018}
           ripple
-          fontSize={160}
+          fontSize={140}
           fontWeight={800}
           style={{ height: "320px" }}
-          fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-          letterSpacing="-0.0001em"
+          fontFamily="TheGlobe, sans-serif"
+          letterSpacing="0.1em"
           lineHeight={0.91}
         />
 
