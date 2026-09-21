@@ -20,7 +20,7 @@ const Header = () => {
           fontSize={140}
           fontWeight={800}
           style={{ height: "320px" }}
-          fontFamily="TheGlobe, sans-serif"
+          fontFamily="MaskingRenta, sans-serif"
           letterSpacing="0.1em"
           lineHeight={0.91}
         />

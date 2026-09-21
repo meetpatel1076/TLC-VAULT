@@ -7,16 +7,30 @@ import {
   MoreVertical,
   PanelLeftClose,
   PanelLeftOpen,
+  LogOut,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import SwipeRow from "./Swiper";
+import api from "../services/api";
 
-const projects = [
-  "Portfolio Website"
-  
-];
 
-const Sidebar = ({ collapsed, setCollapsed }) => {
-  const navigate =useNavigate()
+const Sidebar = ({ collapsed, setCollapsed, projects }) => {
+  const navigate = useNavigate();
+  const [loggingOut, setLoggingOut] = React.useState(false);
+
+  const handleLogout = async () => {
+  if (loggingOut) return;
+
+  try {
+    setLoggingOut(true);
+
+    await api.post("/auth/logout");
+  } catch (error) {
+    console.error("Logout error:", error);
+  } finally {
+    navigate("/login", { replace: true });
+  }
+};
   return (
     <aside
       className={`
@@ -43,7 +57,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
 
 
           {!collapsed && (
-            <span className="text-[17px] font-semibold text-white whitespace-nowrap">
+            <span className="text-[17px] font-bold text-white whitespace-nowrap" style={{fontFamily: "monospace"}}> 
               TLC Vault
             </span>
           )}
@@ -69,7 +83,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       <div className={collapsed ? "px-3 mt-2" : "px-5 mt-2"}>
 
         <button
-        onClick={()=>navigate("/dashboard")}
+          onClick={() => navigate("/dashboard")}
           className={`
             h-[48px] rounded-xl
             border border-[#30343d]
@@ -97,52 +111,60 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       </div>
 
 
-<div
-  className={`
+      <div
+        className={`
     mt-12 px-5
     transition-all duration-300 ease-out
-    ${
-      collapsed
-        ? "opacity-0 -translate-x-3 pointer-events-none"
-        : "opacity-100 translate-x-0"
-    }
-  `}
->
-  <p className="px-3 mb-4 text-[14px] font-medium text-[#9ca3af]">
-    Projects
-  </p>
-
-  <div className="space-y-1">
-
-    {projects.map((project, index) => (
-      <button
-        key={project}
-        className={`
-          w-full
-          rounded-xl
-          text-[15px]
-          text-left
-          px-4 py-3
-          transition-colors duration-200
-
-          ${
-            index === 0
-              ? "bg-[#20232b] text-white border border-[#2d313a]"
-              : "text-[#9ca3af] hover:bg-[#191c22] hover:text-white"
+    ${collapsed
+            ? "opacity-0 -translate-x-3 pointer-events-none"
+            : "opacity-100 translate-x-0"
           }
-        `}
+  `}
       >
-        {project}
-      </button>
-    ))}
+        <p className="px-3 mb-4 text-[14px] font-medium text-[#9ca3af]">
+          Projects
+        </p>
 
-  </div>
+        {projects.length === 0 ? (
+          <p className="px-3 text-sm text-[#666b75]">
+            No projects yet
+          </p>
+        ) : (
+          <div className="space-y-1">
+            {projects.map((project) => {
+              const isSelected =
+                location.pathname === `/repo/${project._id}`;
 
-  <button className="mt-4 px-3 flex items-center gap-2 text-[14px] text-[#9ca3af] hover:text-white transition-colors">
-    Show more
-    <ChevronDown size={15} />
-  </button>
-</div>
+              return (
+                <button
+                  key={project._id}
+                  onClick={() => navigate(`/repo/${project._id}`)}
+                  className={`
+        w-full
+        rounded-xl
+        text-[15px]
+        text-left
+        px-4 py-3
+        transition-all duration-200
+
+        ${isSelected
+                      ? "bg-[#20232b] text-white border border-[#2d313a]"
+                      : "text-[#9ca3af] hover:bg-[#191c22] hover:text-white"
+                    }
+      `}
+                >
+                  {project.name}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        <button className="mt-4 px-3 flex items-center gap-2 text-[14px] text-[#9ca3af] hover:text-white transition-colors">
+          Show more
+          <ChevronDown size={15} />
+        </button>
+      </div>
 
 
       {/* User */}
@@ -152,6 +174,44 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
           ${collapsed ? "px-3" : "px-5"}
         `}
       >
+
+        {/* Logout swipe action */}
+        {!collapsed && (
+          <SwipeRow
+            actions={[
+              {
+                id: "logout",
+                label: loggingOut ? "Logging out..." : "Logout",
+                icon: <LogOut size={19} strokeWidth={2} />,
+              },
+            ]}
+            onCommit={handleLogout}
+            actionColor="#f36631"
+            drawerColor="#3f3f46"
+            rowColor="#27272a"
+            textColor="#f5f5f5"
+            height={52}
+            radius={12}
+            actionWidth={88}
+            direction="left"
+            snapBounce={0.2}
+            resistance={0.55}
+            collapseMs={200}
+            commitAt={0.6}
+            fullSwipe
+            disabled={loggingOut}
+            label="Logout"
+            style={{ marginBottom: 10 }}
+          >
+            <div className="flex w-full items-center justify-between">
+              <span className="text-sm text-zinc-300">
+                Swipe to log out
+              </span>
+              <span className="text-xs text-zinc-500">←</span>
+            </div>
+          </SwipeRow>
+        )}
+
 
         <div
           className={`

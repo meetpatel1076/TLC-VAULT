@@ -24,6 +24,7 @@ const HomePage = () => {
         />
       </div>
 
+
     </div>
   );
 };
