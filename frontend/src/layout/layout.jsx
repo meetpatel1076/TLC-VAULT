@@ -27,10 +27,11 @@ const Layout = () => {
     <div className="min-h-screen bg-[#0e1015]">
 
       <Sidebar
-        collapsed={collapsed}
-        setCollapsed={setCollapsed}
-        projects={projects}
-      />
+  collapsed={collapsed}
+  setCollapsed={setCollapsed}
+  projects={projects}
+  fetchProjects={fetchProjects}
+/>
 
       <div
         className={`

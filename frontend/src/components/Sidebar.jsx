@@ -9,28 +9,52 @@ import {
   PanelLeftOpen,
   LogOut,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+
+import { useLocation, useNavigate } from "react-router-dom";
 import SwipeRow from "./Swiper";
 import api from "../services/api";
 
 
-const Sidebar = ({ collapsed, setCollapsed, projects }) => {
+const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [loggingOut, setLoggingOut] = React.useState(false);
+  const [deletingId, setDeletingId] = React.useState(null);
+  const [deleteProject, setDeleteProject] = React.useState(null);
+
+  const handleDeleteProject = async (repoId) => {
+    if (deletingId) return;
+
+    try {
+      setDeletingId(repoId);
+
+      await api.delete(`/repositories/${repoId}`);
+
+      await fetchProjects();
+
+      if (location.pathname === `/repo/${repoId}`) {
+        navigate("/dashboard", { replace: true });
+      }
+    } catch (error) {
+      console.error("Failed to delete project:", error);
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   const handleLogout = async () => {
-  if (loggingOut) return;
+    if (loggingOut) return;
 
-  try {
-    setLoggingOut(true);
+    try {
+      setLoggingOut(true);
 
-    await api.post("/auth/logout");
-  } catch (error) {
-    console.error("Logout error:", error);
-  } finally {
-    navigate("/login", { replace: true });
-  }
-};
+      await api.post("/auth/logout");
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      navigate("/login", { replace: true });
+    }
+  };
   return (
     <aside
       className={`
@@ -57,7 +81,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects }) => {
 
 
           {!collapsed && (
-            <span className="text-[17px] font-bold text-white whitespace-nowrap" style={{fontFamily: "monospace"}}> 
+            <span className="text-[17px] font-bold text-white whitespace-nowrap" style={{ fontFamily: "monospace" }}>
               TLC Vault
             </span>
           )}
@@ -136,25 +160,53 @@ const Sidebar = ({ collapsed, setCollapsed, projects }) => {
                 location.pathname === `/repo/${project._id}`;
 
               return (
-                <button
+                <div
                   key={project._id}
-                  onClick={() => navigate(`/repo/${project._id}`)}
                   className={`
-        w-full
-        rounded-xl
-        text-[15px]
-        text-left
-        px-4 py-3
-        transition-all duration-200
-
-        ${isSelected
-                      ? "bg-[#20232b] text-white border border-[#2d313a]"
-                      : "text-[#9ca3af] hover:bg-[#191c22] hover:text-white"
+          group w-full rounded-xl
+          flex items-center
+          transition-all duration-200
+          ${isSelected
+                      ? "bg-[#20232b] border border-[#2d313a]"
+                      : "hover:bg-[#191c22]"
                     }
-      `}
+        `}
                 >
-                  {project.name}
-                </button>
+                  <button
+                    onClick={() => navigate(`/repo/${project._id}`)}
+                    className={`
+            flex-1 min-w-0
+            text-[15px]
+            text-left
+            px-4 py-3
+            truncate
+            ${isSelected
+                        ? "text-white"
+                        : "text-[#9ca3af] group-hover:text-white"
+                      }
+          `}
+                  >
+                    {project.name}
+                  </button>
+
+                  <button
+                    onClick={() => setDeleteProject(project)}
+                    disabled={deletingId === project._id}
+                    className="
+            mr-2 p-1.5
+            rounded-lg
+            text-[#717784]
+            opacity-0
+            group-hover:opacity-100
+            hover:text-red-400
+            hover:bg-[#272a31]
+            transition
+            disabled:opacity-50
+          "
+                  >
+                    <MoreVertical size={17} />
+                  </button>
+                </div>
               );
             })}
           </div>
@@ -246,6 +298,43 @@ const Sidebar = ({ collapsed, setCollapsed, projects }) => {
         </div>
 
       </div>
+      {deleteProject && (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4">
+    <div className="w-full max-w-md rounded-2xl border border-[#30343d] bg-[#111318] p-6 shadow-2xl">
+      
+      <h2 className="text-lg font-semibold text-white">
+        Delete project?
+      </h2>
+
+      <p className="mt-2 text-sm leading-relaxed text-[#9ca3af]">
+        This will permanently delete{" "}
+        <span className="font-medium text-white">
+          {deleteProject.name}
+        </span>{" "}
+        and all of its saved code files.
+      </p>
+
+      <div className="mt-6 flex justify-end gap-3">
+        <button
+          onClick={() => setDeleteProject(null)}
+          disabled={deletingId}
+          className="rounded-lg px-4 py-2 text-sm text-[#9ca3af] hover:bg-[#191c22] hover:text-white transition"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={() => handleDeleteProject(deleteProject._id)}
+          disabled={deletingId}
+          className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 disabled:opacity-50 transition"
+        >
+          {deletingId ? "Deleting..." : "Delete Project"}
+        </button>
+      </div>
+
+    </div>
+  </div>
+)}
 
     </aside>
   );
