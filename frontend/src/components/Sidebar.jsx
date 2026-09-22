@@ -31,6 +31,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects }) => {
       await api.delete(`/repositories/${repoId}`);
 
       await fetchProjects();
+      setDeleteProject(null);
 
       if (location.pathname === `/repo/${repoId}`) {
         navigate("/dashboard", { replace: true });
