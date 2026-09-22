@@ -276,7 +276,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
           {/* Avatar */}
           <div className="w-10 h-10 shrink-0 rounded-full bg-[#292d35] border border-[#3a3e47] flex items-center justify-center">
             <span className="text-sm font-medium text-white">
-              T
+              {user?.email?.charAt(0).toUpperCase() || "U"}
             </span>
           </div>
 

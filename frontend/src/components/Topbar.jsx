@@ -1,7 +1,7 @@
 import { Search } from 'lucide-react'
 import React from 'react'
 
-const Topbar = ({ collapsed }) => {
+const Topbar = ({ collapsed, user }) => {
     return (
         <header
             className={`
@@ -48,7 +48,9 @@ const Topbar = ({ collapsed }) => {
                 </button>
 
                 <div className="ml-10 w-8 h-8 rounded-full bg-[#292d35] flex items-center justify-center">
-                    <span className="text-xs text-white">T</span>
+                    <span className="text-xs text-white">
+                        {user?.email?.charAt(0).toUpperCase() || "U"}
+                    </span>
                 </div>
             </div>
 

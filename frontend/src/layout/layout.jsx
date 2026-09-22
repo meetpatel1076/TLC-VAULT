@@ -51,7 +51,7 @@ const fetchUser = async () => {
           ${collapsed ? "ml-[72px]" : "ml-[300px]"}
         `}
       >
-        <Topbar collapsed={collapsed} />
+        <Topbar collapsed={collapsed} user={user} />
 
         <Outlet context={{ fetchProjects }} />
       </div>
