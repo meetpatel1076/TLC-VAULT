@@ -15,7 +15,7 @@ import SwipeRow from "./Swiper";
 import api from "../services/api";
 
 
-const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects }) => {
+const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [loggingOut, setLoggingOut] = React.useState(false);
@@ -284,11 +284,11 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects }) => {
             <>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-white">
-                  Meet
+                  {user?.name || "User"}
                 </p>
 
                 <p className="text-xs text-[#9ca3af] truncate">
-                  meetpatel@gmail.com
+                  {user?.email || ""}
                 </p>
               </div>
 
@@ -300,42 +300,42 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects }) => {
 
       </div>
       {deleteProject && (
-  <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4">
-    <div className="w-full max-w-md rounded-2xl border border-[#30343d] bg-[#111318] p-6 shadow-2xl">
-      
-      <h2 className="text-lg font-semibold text-white">
-        Delete project?
-      </h2>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4">
+          <div className="w-full max-w-md rounded-2xl border border-[#30343d] bg-[#111318] p-6 shadow-2xl">
 
-      <p className="mt-2 text-sm leading-relaxed text-[#9ca3af]">
-        This will permanently delete{" "}
-        <span className="font-medium text-white">
-          {deleteProject.name}
-        </span>{" "}
-        and all of its saved code files.
-      </p>
+            <h2 className="text-lg font-semibold text-white">
+              Delete project?
+            </h2>
 
-      <div className="mt-6 flex justify-end gap-3">
-        <button
-          onClick={() => setDeleteProject(null)}
-          disabled={deletingId}
-          className="rounded-lg px-4 py-2 text-sm text-[#9ca3af] hover:bg-[#191c22] hover:text-white transition"
-        >
-          Cancel
-        </button>
+            <p className="mt-2 text-sm leading-relaxed text-[#9ca3af]">
+              This will permanently delete{" "}
+              <span className="font-medium text-white">
+                {deleteProject.name}
+              </span>{" "}
+              and all of its saved code files.
+            </p>
 
-        <button
-          onClick={() => handleDeleteProject(deleteProject._id)}
-          disabled={deletingId}
-          className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 disabled:opacity-50 transition"
-        >
-          {deletingId ? "Deleting..." : "Delete Project"}
-        </button>
-      </div>
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                onClick={() => setDeleteProject(null)}
+                disabled={deletingId}
+                className="rounded-lg px-4 py-2 text-sm text-[#9ca3af] hover:bg-[#191c22] hover:text-white transition"
+              >
+                Cancel
+              </button>
 
-    </div>
-  </div>
-)}
+              <button
+                onClick={() => handleDeleteProject(deleteProject._id)}
+                disabled={deletingId}
+                className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 disabled:opacity-50 transition"
+              >
+                {deletingId ? "Deleting..." : "Delete Project"}
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
 
     </aside>
   );

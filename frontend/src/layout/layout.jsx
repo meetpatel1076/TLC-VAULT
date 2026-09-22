@@ -8,6 +8,7 @@ import api from "../services/api";
 const Layout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [projects, setProjects] = useState([]);
+  const [user, setUser] = useState(null);
 
   const fetchProjects = async () => {
     try {
@@ -18,9 +19,18 @@ const Layout = () => {
       console.error("Failed to fetch projects:", error);
     }
   };
+const fetchUser = async () => {
+  try {
+    const response = await api.get("/auth/me");
+    setUser(response.data.user);
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+  }
+};
 
   useEffect(() => {
     fetchProjects();
+     fetchUser();
   }, []);
 
   return (
@@ -31,6 +41,7 @@ const Layout = () => {
   setCollapsed={setCollapsed}
   projects={projects}
   fetchProjects={fetchProjects}
+    user={user}
 />
 
       <div
