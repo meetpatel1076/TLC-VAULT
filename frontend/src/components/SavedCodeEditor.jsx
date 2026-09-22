@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
-import { Save, Trash2 } from "lucide-react";
+import { Save, Trash2, Copy, Check } from "lucide-react";
 import api from "../services/api";
 import HoldButton from "./HoldButton";
 
@@ -8,6 +8,27 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
   const [code, setCode] = useState(file.code || "");
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setCopied(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 1500);
+  };
 
   const handleSave = async () => {
     try {
@@ -39,15 +60,15 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
     }
   };
   const editorHeight = Math.min(
-  Math.max(100, code.split("\n").length * 20 + 32),
-  600
-);
+    Math.max(100, code.split("\n").length * 20 + 32),
+    600
+  );
 
   return (
     <div className="rounded-xl border border-[#30343d] bg-[#111318] overflow-hidden">
-      
+
       <div className="h-14 flex items-center justify-between px-4 border-b border-[#30343d]">
-        
+
         <div className="flex items-center gap-3">
           <span className="text-white font-medium">
             {file.name}
@@ -60,6 +81,12 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
 
         <div className="flex items-center gap-2">
           <button
+            onClick={handleCopy}
+            className="text-[#9ca3af] hover:text-white transition"
+          >
+            {copied ? <Check size={18} /> : <Copy size={18} />}
+          </button>
+          <button
             onClick={handleSave}
             disabled={saving}
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-[#9ca3af] hover:text-white hover:bg-[#191c22] transition disabled:opacity-50"
@@ -68,18 +95,18 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
             {saving ? "updating..." : "Update"}
           </button>
 
-         <HoldButton
-  onHold={handleDelete}
-  disabled={deleting}
-  holdTime={1500}
-  backgroundColor="#191c22"
-  fillColor="#FF0000"
-  textColor="#9ca3af"
-  fillTextColor="#ffffff"
-  size="sm"
->
-  Delete
-</HoldButton>
+          <HoldButton
+            onHold={handleDelete}
+            disabled={deleting}
+            holdTime={1500}
+            backgroundColor="#191c22"
+            fillColor="#FF0000"
+            textColor="#9ca3af"
+            fillTextColor="#ffffff"
+            size="sm"
+          >
+            Delete
+          </HoldButton>
         </div>
 
       </div>
@@ -100,7 +127,7 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
           smoothScrolling: true,
           cursorSmoothCaretAnimation: "on",
           scrollBeyondLastLine: false,
-          
+
         }}
       />
 
