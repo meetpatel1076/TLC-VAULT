@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import api from "../services/api";
 
 export default function SignupPage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -34,15 +36,18 @@ export default function SignupPage() {
       setLoading(true);
       setError("");
 
-      const response = await api.post("/auth/register", {
+      await api.post("/auth/register", {
         name: form.name.trim(),
         email: form.email.trim(),
         password: form.password,
       });
 
-      console.log("SIGNUP RESPONSE:", response.data);
+      await api.post("/auth/login", {
+        email: form.email.trim(),
+        password: form.password,
+      });
 
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
 
     } catch (err) {
       setError(
@@ -81,12 +86,11 @@ export default function SignupPage() {
             </span>
           </div>
 
-          <a
-            href="/"
-            className="absolute right-7 top-7 z-10 rounded-full border border-zinc-700 bg-zinc-900/70 px-3.5 py-1.5 text-xs text-zinc-400 transition hover:border-zinc-600 hover:text-[#f6f1e8] sm:right-9 sm:top-9"
+          <Link to="/"
+            className="absolute right-7 top-7 z-10 rounded-full border border-zinc-700 bg-zinc-950/60 px-3.5 py-1.5 text-xs text-zinc-400 backdrop-blur-sm transition hover:border-zinc-600 hover:text-[#f6f1e8] sm:right-9 sm:top-9"
           >
             Back to website →
-          </a>
+          </Link>
 
           {/* orange horizon */}
           <div className="absolute bottom-[15%] left-[9%] z-10 h-[2px] w-28 bg-[#f36631] shadow-[0_0_28px_rgba(243,102,49,0.5)]" />
@@ -216,12 +220,11 @@ export default function SignupPage() {
 
             <p className="mt-7 text-center text-xs text-zinc-500">
               Already have an account?{" "}
-              <a
-                href="/login"
-                className="font-medium text-[#f6f1e8] underline decoration-[#f36631]/70 underline-offset-4 transition hover:text-[#f36631]"
-              >
+
+              <Link to="/login"
+                className="font-medium text-[#f6f1e8] underline decoration-[#f36631]/70 underline-offset-4 transition hover:text-[#f36631]">
                 Log in
-              </a>
+              </Link>
             </p>
           </div>
         </section>

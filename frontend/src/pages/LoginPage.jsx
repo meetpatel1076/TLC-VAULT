@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import api from "../services/api";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -40,7 +42,7 @@ export default function LoginPage() {
 
       console.log("LOGIN RESPONSE:", response.data);
 
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
 
     } catch (err) {
       setError(
@@ -85,12 +87,13 @@ export default function LoginPage() {
           </div>
 
           {/* Back */}
-          <a
-            href="/"
+
+
+          <Link to="/"
             className="absolute right-7 top-7 z-10 rounded-full border border-zinc-700 bg-zinc-950/60 px-3.5 py-1.5 text-xs text-zinc-400 backdrop-blur-sm transition hover:border-zinc-600 hover:text-[#f6f1e8] sm:right-9 sm:top-9"
           >
             Back to website →
-          </a>
+          </Link>
 
           {/* Left copy */}
           <div className="absolute bottom-10 left-7 z-10 max-w-[480px] sm:bottom-14 sm:left-16">
@@ -212,12 +215,11 @@ export default function LoginPage() {
 
             <p className="mt-7 text-center text-xs text-zinc-500">
               Don't have an account?{" "}
-              <a
-                href="/register"
-                className="font-medium text-[#f6f1e8] underline decoration-[#f36631]/70 underline-offset-4 transition hover:text-[#f36631]"
-              >
+
+              <Link to="/register"
+                className="font-medium text-[#f6f1e8] underline decoration-[#f36631]/70 underline-offset-4 transition hover:text-[#f36631]">
                 Create one
-              </a>
+              </Link>
             </p>
           </div>
         </section>
