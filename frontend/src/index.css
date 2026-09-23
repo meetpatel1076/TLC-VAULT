@@ -67,3 +67,8 @@ body {
   font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
