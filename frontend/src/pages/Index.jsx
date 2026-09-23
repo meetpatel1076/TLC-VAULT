@@ -25,7 +25,7 @@ const Index = () => {
           </button>
 
           <button
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/register")}
             className="px-6 py-3 rounded-lg border border-[#30343d] text-[#d1d5db] font-medium hover:bg-[#191c22] transition"
           >
             Sign Up

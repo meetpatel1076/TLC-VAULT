@@ -213,10 +213,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
           </div>
         )}
 
-        <button className="mt-4 px-3 flex items-center gap-2 text-[14px] text-[#9ca3af] hover:text-white transition-colors">
-          Show more
-          <ChevronDown size={15} />
-        </button>
+      
       </div>
 
 
