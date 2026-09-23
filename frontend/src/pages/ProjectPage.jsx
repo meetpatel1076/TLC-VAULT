@@ -94,8 +94,8 @@ const ProjectPage = () => {
     description.trim() !== (project.description || "");
 
   return (
-    <main ref={pageRef} className="min-h-screen bg-[#0e1015] text-white pt-20 px-10">
-      <div className="max-w-5xl mb-6 mx-auto  noise-bg">
+    <main ref={pageRef} className="noise-bg min-h-screen bg-[#0e1015] text-white pt-20 px-10">
+      <div className="max-w-5xl mb-6 mx-auto  ">
 
 
         <div className="flex items-center gap-3">
