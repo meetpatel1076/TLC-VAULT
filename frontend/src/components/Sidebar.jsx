@@ -108,7 +108,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
       <div className={collapsed ? "px-3 mt-2" : "px-5 mt-2"}>
 
         <button
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate(user ? "/dashboard" : "/login")}
           className={`
             h-[48px] rounded-xl
             border border-[#30343d]
@@ -213,7 +213,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
           </div>
         )}
 
-      
+
       </div>
 
 
@@ -226,7 +226,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
       >
 
         {/* Logout swipe action */}
-        {!collapsed && (
+        {!collapsed && user && (
           <SwipeRow
             actions={[
               {

@@ -53,7 +53,7 @@ const fetchUser = async () => {
       >
         <Topbar collapsed={collapsed} user={user} />
 
-        <Outlet context={{ fetchProjects }} />
+        <Outlet context={{ fetchProjects, user }} />
       </div>
 
     </div>

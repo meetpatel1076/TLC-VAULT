@@ -7,7 +7,7 @@ import CreateProject from "../components/CreateProject";
 
 const HomePage = () => {
 
-  const { fetchProjects } = useOutletContext();
+  const { fetchProjects, user } = useOutletContext();
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -21,6 +21,7 @@ const HomePage = () => {
 
         <CreateProject
           fetchProjects={fetchProjects}
+          user={user}
         />
       </div>
 

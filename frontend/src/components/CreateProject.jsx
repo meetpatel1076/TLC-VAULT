@@ -3,7 +3,7 @@ import { Plus, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
-const CreateProject = ({ fetchProjects }) => {
+const CreateProject = ({ fetchProjects, user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -60,7 +60,14 @@ const CreateProject = ({ fetchProjects }) => {
 
         {/* BUTTON / HEADER */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => {
+            if (!user) {
+              navigate("/login");
+              return;
+            }
+
+            setIsOpen(!isOpen);
+          }}
           className="w-full h-16 px-5 flex items-center gap-3 text-white bg-[#f64f12] transition"
         >
 
