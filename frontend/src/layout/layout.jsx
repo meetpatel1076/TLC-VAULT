@@ -19,30 +19,30 @@ const Layout = () => {
       console.error("Failed to fetch projects:", error);
     }
   };
-const fetchUser = async () => {
-  try {
-    const response = await api.get("/auth/me");
-    setUser(response.data.user);
-  } catch (error) {
-    console.error("Failed to fetch user:", error);
-  }
-};
+  const fetchUser = async () => {
+    try {
+      const response = await api.get("/auth/me");
+      setUser(response.data.user);
+    } catch (error) {
+      console.error("Failed to fetch user:", error);
+    }
+  };
 
   useEffect(() => {
     fetchProjects();
-     fetchUser();
+    fetchUser();
   }, []);
 
   return (
     <div className="min-h-screen bg-[#0e1015]">
 
       <Sidebar
-  collapsed={collapsed}
-  setCollapsed={setCollapsed}
-  projects={projects}
-  fetchProjects={fetchProjects}
-    user={user}
-/>
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+        projects={projects}
+        fetchProjects={fetchProjects}
+        user={user}
+      />
 
       <div
         className={`
