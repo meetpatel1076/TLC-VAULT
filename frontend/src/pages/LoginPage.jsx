@@ -35,14 +35,23 @@ export default function LoginPage() {
       setLoading(true);
       setError("");
 
-      const response = await api.post("/auth/login", {
+      await api.post("/auth/login", {
         email: form.email.trim(),
         password: form.password,
       });
 
-      console.log("LOGIN RESPONSE:", response.data);
+      const meResponse = await api.get("/auth/me");
 
-      navigate("/dashboard");
+      const role = meResponse.data?.user?.role;
+
+      console.log("ME RESPONSE:", meResponse.data);
+      console.log("ROLE:", role);
+
+      if (role === "admin") {
+        navigate("/admin", { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
 
     } catch (err) {
       setError(
