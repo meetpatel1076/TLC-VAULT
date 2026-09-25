@@ -42,10 +42,8 @@ const Topbar = ({ collapsed, user }) => {
 
             {/* your existing content */}
 
-            <div className='flex '>
-                <button className="text-[#9ca3af] hover:text-white">
-                    <Search size={20} />
-                </button>
+            <div className=' '>
+                
 
                 <div className="ml-10 w-8 h-8 rounded-full bg-[#292d35] flex items-center justify-center">
                     <span className="text-xs text-white">

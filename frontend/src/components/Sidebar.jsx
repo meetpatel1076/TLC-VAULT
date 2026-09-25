@@ -237,7 +237,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
             ]}
             onCommit={handleLogout}
             actionColor="#f36631"
-            drawerColor="#3f3f46"
+            drawerColor="#27272a"
             rowColor="#27272a"
             textColor="#f5f5f5"
             height={52}

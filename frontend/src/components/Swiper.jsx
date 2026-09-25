@@ -354,7 +354,7 @@ export default function SwipeRow({
       <div className="relative overflow-hidden [height:var(--sr-h)] [border-radius:var(--sr-r)] [background:var(--sr-row)]">
         <motion.div
           id={railId}
-          className="absolute inset-0 [background:var(--sr-drawer)]"
+          className="absolute inset-0 bg-transparent"
           style={{ transform: railXf }}
           inert={!open || undefined}
           aria-hidden={!open}
