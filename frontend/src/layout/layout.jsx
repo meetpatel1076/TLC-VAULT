@@ -34,7 +34,7 @@ const Layout = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0e1015]">
+    <div className="min-h-screen bg-primary">
 
       <Sidebar
         collapsed={collapsed}
