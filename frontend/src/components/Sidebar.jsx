@@ -61,7 +61,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
       className={`
         fixed left-0 top-0 z-50 h-screen
         border-r border-[#252830]
-        bg-[#0D0D0F]
+        bg-sidebar
         flex flex-col
         transition-all duration-300
         ${collapsed ? "w-[72px]" : "w-[300px]"}

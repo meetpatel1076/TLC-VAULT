@@ -84,7 +84,7 @@ const ProjectPage = () => {
 
   if (!project)
     return (
-      <main className="min-h-screen bg-[#0e1015] text-red-400 pt-20 px-10">
+      <main className="min-h-screen bg-primary text-red-400 pt-20 px-10">
         {error || "Project not found."}
       </main>
     );
@@ -94,7 +94,7 @@ const ProjectPage = () => {
     description.trim() !== (project.description || "");
 
   return (
-    <main ref={pageRef} className="min-h-screen bg-[#0e1015] text-white pt-20 px-10">
+    <main ref={pageRef} className="min-h-screen bg-primary text-white pt-20 px-10">
       <div className="max-w-5xl mb-6 mx-auto  ">
 
 

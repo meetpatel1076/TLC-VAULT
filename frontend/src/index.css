@@ -60,7 +60,7 @@ body,
 #root {
   margin: 0;
   min-height: 100%;
-  background: #0e1015;
+  background: #0c0d0e;
 }
 
 body {
@@ -72,3 +72,8 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+@theme {
+  
+  --color-sidebar: #0D0D0F;
+  --color-primary: #09090b;
+}
