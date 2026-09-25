@@ -138,7 +138,7 @@ const CreateProject = ({ fetchProjects, user }) => {
     w-full px-4 py-3
     rounded-lg
     border border-[#30343d]
-    bg-[#0e1015]
+    bg-primary
     text-white
     placeholder:text-[#666b75]
     outline-none

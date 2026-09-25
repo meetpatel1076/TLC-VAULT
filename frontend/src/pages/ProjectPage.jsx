@@ -77,7 +77,7 @@ const ProjectPage = () => {
 
   if (loading)
     return (
-      <main className="min-h-screen bg-[#0e1015] text-white pt-20 px-10">
+      <main className="min-h-screen bg-primary text-white pt-20 px-10">
         Loading project...
       </main>
     );

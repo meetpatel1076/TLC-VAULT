@@ -8,7 +8,7 @@ const Topbar = ({ collapsed, user }) => {
         fixed top-0 right-0
         h-[70px]
         border-b border-[#252830]
-        bg-[#0e1015]
+        bg-sidebar
         flex items-center justify-end px-7
         transition-all duration-300
         z-50
