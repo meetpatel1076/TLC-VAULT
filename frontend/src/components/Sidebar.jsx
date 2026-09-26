@@ -127,7 +127,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
 
           {!collapsed && (
             <span className="font-medium">
-              New Project
+              New Repository
             </span>
           )}
 
@@ -147,12 +147,12 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
   `}
       >
         <p className="px-3 mb-4 text-[14px] font-medium text-[#9ca3af]">
-          Projects
+          Repositories
         </p>
 
         {projects.length === 0 ? (
           <p className="px-3 text-sm text-[#666b75]">
-            No projects yet
+            No repositories yet
           </p>
         ) : (
           <div className="space-y-1">
@@ -231,7 +231,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
     label="Swipe to log out"
     onConfirm={handleLogout}
     trackColor="#27272a"
-    handleColor="#f64f12"
+    handleColor="#a1a1aa"
     successColor="#f64f12"
     dangerColor="#ef4444"
     width={260}

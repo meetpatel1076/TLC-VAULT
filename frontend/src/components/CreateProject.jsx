@@ -34,7 +34,7 @@ const CreateProject = ({ fetchProjects, user }) => {
 
     } catch (error) {
       console.error(
-        "Failed to create project:",
+        "Failed to create repository:",
         error.response?.data || error
       );
     } finally {
@@ -78,7 +78,7 @@ const CreateProject = ({ fetchProjects, user }) => {
           )}
 
           <span className="font-medium">
-            {isOpen ? "Create Project" : "New Project"}
+            {isOpen ? "Create Repository" : "New Repository"}
           </span>
 
         </button>
@@ -101,7 +101,7 @@ const CreateProject = ({ fetchProjects, user }) => {
             {/* Title */}
             <div>
               <label className="block mb-2 text-sm text-[#9ca3af]">
-                Project title
+                Repository title
               </label>
 
               <input
@@ -165,7 +165,7 @@ const CreateProject = ({ fetchProjects, user }) => {
   "
               onClick={handleCreateProject}
             >
-              {loading ? "Creating..." : "Create Project"}
+              {loading ? "Creating..." : "Create Repository"}
             </button>
 
           </div>
