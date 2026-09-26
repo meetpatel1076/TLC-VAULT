@@ -34,7 +34,7 @@ const AdminTopbar = () => {
   };
 
   return (
-    <header className="flex h-full items-center justify-between px-5 sm:px-7">
+    <header className="flex h-full items-center bg-sidebar justify-between px-5 sm:px-7">
 
       {/* SEARCH */}
       <div className="w-full max-w-[520px]">

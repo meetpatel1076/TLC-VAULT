@@ -55,7 +55,7 @@ const AdminSidebar = () => {
   };
 
   return (
-    <aside className="flex h-screen w-[250px] shrink-0 flex-col border-r border-zinc-800 bg-zinc-950">
+    <aside className="flex h-screen w-[250px] shrink-0 flex-col border-r border-zinc-800 bg-sidebar">
 
       {/* BRAND */}
       <div className="px-6 pt-6">
