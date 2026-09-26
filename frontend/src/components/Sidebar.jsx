@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import SwipeRow from "./Swiper";
+import SlideCommit from "./SlideCommit";
 import api from "../services/api";
 
 
@@ -226,41 +226,23 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
       >
 
         {/* Logout swipe action */}
-        {!collapsed && user && (
-          <SwipeRow
-            actions={[
-              {
-                id: "logout",
-                label: loggingOut ? "Logging out..." : "Logout",
-                icon: <LogOut size={19} strokeWidth={2} />,
-              },
-            ]}
-            onCommit={handleLogout}
-            actionColor="#f36631"
-            drawerColor="#27272a"
-            rowColor="#27272a"
-            textColor="#f5f5f5"
-            height={52}
-            radius={12}
-            actionWidth={88}
-            direction="left"
-            snapBounce={0.2}
-            resistance={0.55}
-            collapseMs={200}
-            commitAt={0.6}
-            fullSwipe
-            disabled={loggingOut}
-            label="Logout"
-            style={{ marginBottom: 10 }}
-          >
-            <div className="flex w-full items-center justify-between">
-              <span className="text-sm text-zinc-300">
-                Swipe to log out
-              </span>
-              <span className="text-xs text-zinc-500">←</span>
-            </div>
-          </SwipeRow>
-        )}
+       {!collapsed && user && (
+  <SlideCommit
+    label="Swipe to log out"
+    onConfirm={handleLogout}
+    trackColor="#27272a"
+    handleColor="#f64f12"
+    successColor="#f64f12"
+    dangerColor="#ef4444"
+    width={260}
+    height={52}
+    radius={12}
+    holdMs={0}
+    disabled={loggingOut}
+    icon={<LogOut size={19} strokeWidth={2} />}
+    className="mb-2.5"
+  />
+)}
 
 
         <div
