@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import AdminSidebar from "../components/admin/AdminSidebar";
 import AdminTopbar from "../components/admin/AdminTopbar";
+// due to system error adminLayout was misread to adminlayout then error occure in deployement 
+
 
 const AdminLayout = () => {
   return (
