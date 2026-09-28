@@ -78,7 +78,7 @@ const ProjectPage = () => {
   if (loading)
     return (
       <main className="min-h-screen bg-primary text-white pt-20 px-10">
-        Loading project...
+        Loading repository...
       </main>
     );
 

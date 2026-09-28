@@ -38,7 +38,7 @@ const AdminRoute = () => {
 
   if (status === "loading") {
     return (
-      <main className="min-h-screen bg-[#0e1015] flex items-center justify-center text-[#f6f1e8]">
+      <main className="min-h-screen bg-primary flex items-center justify-center text-[#f6f1e8]">
         <div className="text-sm text-zinc-500">
           Checking access...
         </div>
