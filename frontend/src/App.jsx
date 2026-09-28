@@ -13,7 +13,7 @@ import AdminRoute from "./components/AdminRoute";
 import AdminUsers from "./pages/AdminUsersPage";
 import AdminRepositories from "./pages/AdminRepositoriesPage";
 import AdminCodeFiles from "./pages/AdminCodeFilesPage";
-import AdminLayout from "./layout/Adminlayout";
+import AdminLayout from "./layout/AdminLayout";
 
 
 const App = () => {
