@@ -46,9 +46,9 @@ const AdminPage = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#0e1015] text-[#f6f1e8]">
+   <main className="h-screen overflow-hidden bg-[#0e1015] text-[#f6f1e8]">
 
-      <div className="flex min-h-screen">
+    <div className="flex h-full">
 
         {/* ADMIN SIDEBAR AREA */}
         <div className="hidden lg:block">
@@ -56,10 +56,10 @@ const AdminPage = () => {
         </div>
 
         {/* MAIN WORKSPACE */}
-        <section className="min-w-0 flex-1">
+       <section className="min-w-0 flex-1 h-full overflow-y-auto">
 
           {/* TOPBAR AREA */}
-          <header className="h-[72px] border-b border-zinc-800 bg-[#0e1015]">
+         <header className="sticky top-0 z-40 h-[72px] border-b border-zinc-800 bg-[#0e1015]">
             <AdminTopbar />
           </header>
 

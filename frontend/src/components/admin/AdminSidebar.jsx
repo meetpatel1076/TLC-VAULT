@@ -8,6 +8,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import HoldButton from "../HoldButton";
 
 import api from "../../services/api";
 
@@ -61,14 +62,22 @@ const AdminSidebar = () => {
       <div className="px-6 pt-6">
         <div className="flex items-center gap-3">
 
-          <div className="flex h-8 w-8 items-center justify-center rounded-md border border-zinc-700 text-[10px] font-semibold tracking-tight text-[#f36631]">
-            TLC
+          <div className="left-6 flex items-center">
+            <img
+              src="/tlc-vault-logo.png"
+              alt="TLC Vault"
+              className="h-9 w-9 object-contain"
+            />
           </div>
+
 
           <div>
             <p className="text-sm font-medium tracking-tight text-[#f6f1e8]">
               TLC Vault
+
             </p>
+
+
 
             <p className="mt-0.5 text-[10px] uppercase tracking-[0.18em] text-zinc-600">
               Admin Console
@@ -102,10 +111,9 @@ const AdminSidebar = () => {
                 className={`
                   group flex h-10 items-center gap-3 rounded-md px-3
                   text-sm transition-colors duration-200
-                  ${
-                    isActive
-                      ? "bg-zinc-900 text-[#f6f1e8]"
-                      : "text-zinc-500 hover:bg-zinc-900/70 hover:text-zinc-200"
+                  ${isActive
+                    ? "bg-zinc-900 text-[#f6f1e8]"
+                    : "text-zinc-500 hover:bg-zinc-900/70 hover:text-zinc-200"
                   }
                 `}
               >
@@ -121,9 +129,7 @@ const AdminSidebar = () => {
 
                 <span>{item.label}</span>
 
-                {isActive && (
-                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#f36631]" />
-                )}
+
               </NavLink>
             );
           })}
@@ -157,29 +163,22 @@ const AdminSidebar = () => {
         </button>
 
         {/* LOGOUT */}
-        <button
-          type="button"
-          onClick={handleLogout}
+        <HoldButton
+          onHold={handleLogout}
           disabled={loggingOut}
-          className="
-            group mt-1 flex h-10 w-full items-center gap-3
-            rounded-md px-3
-            text-sm text-zinc-500
-            transition-colors duration-200
-            hover:bg-zinc-900/70 hover:text-zinc-200
-            disabled:cursor-not-allowed disabled:opacity-50
-          "
+          holdTime={1500}
+          backgroundColor="#27272a"
+          fillColor="#f64f12"
+          textColor="#a1a1aa"
+          fillTextColor="#ffffff"
+          size="xl"
+          radius={8}
+          icon={<LogOut size={20} strokeWidth={1.7} />}
+          className="mt-1 w-full"
         >
-          <LogOut
-            size={17}
-            strokeWidth={1.7}
-            className="text-zinc-500 group-hover:text-zinc-300"
-          />
+          Hold to logout
+        </HoldButton>
 
-          <span>
-            {loggingOut ? "Logging out..." : "Logout"}
-          </span>
-        </button>
 
       </div>
     </aside>
