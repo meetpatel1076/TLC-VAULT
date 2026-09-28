@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Users, ChevronDown, RefreshCw } from "lucide-react";
 
-import AdminSidebar from "../components/admin/AdminSidebar";
-import AdminTopbar from "../components/admin/AdminTopbar";
+
 import api from "../services/api";
 
 const AdminUsersPage = () => {
@@ -29,7 +28,7 @@ const AdminUsersPage = () => {
 
       setError(
         error.response?.data?.message ||
-          "Failed to load users."
+        "Failed to load users."
       );
     } finally {
       setLoading(false);
@@ -72,23 +71,7 @@ const AdminUsersPage = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#0e1015] text-[#f6f1e8]">
-      <div className="flex min-h-screen">
 
-        {/* Desktop Sidebar */}
-        <div className="hidden lg:block">
-          <AdminSidebar />
-        </div>
-
-        {/* Main */}
-        <div className="min-w-0 flex-1">
-
-          {/* Topbar */}
-          <header className="h-[72px] border-b border-zinc-800 bg-[#0e1015]">
-            <AdminTopbar />
-          </header>
-
-          {/* Content */}
           <div className="p-4 sm:p-7 lg:p-8">
 
             {/* Page Heading */}
@@ -418,9 +401,7 @@ const AdminUsersPage = () => {
 
             </section>
           </div>
-        </div>
-      </div>
-    </main>
+        
   );
 };
 
