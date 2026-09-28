@@ -10,6 +10,9 @@ import IndexPage from "./pages/Index";
 
 import AdminPage from "./pages/AdminPage";
 import AdminRoute from "./components/AdminRoute";
+import AdminUsers from "./pages/AdminUsersPage";
+import AdminRepositories from "./pages/AdminRepositoriesPage";
+import AdminCodeFiles from "./pages/AdminCodeFilesPage";
 
 const App = () => {
   return (
@@ -43,6 +46,21 @@ const App = () => {
         <Route
           path="/admin"
           element={<AdminPage />}
+        />
+
+        <Route
+          path="/admin/users"
+          element={<AdminUsers />}
+        />
+
+        <Route
+          path="/admin/repositories"
+          element={<AdminRepositories />}
+        />
+
+        <Route
+          path="/admin/codefiles"
+          element={<AdminCodeFiles />}
         />
       </Route>
 
