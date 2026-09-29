@@ -5,8 +5,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 
-import AdminSidebar from "../components/admin/AdminSidebar";
-import AdminTopbar from "../components/admin/AdminTopbar";
+
 import api from "../services/api";
 
 const AdminRepositoriesPage = () => {
@@ -44,7 +43,7 @@ const AdminRepositoriesPage = () => {
 
       setError(
         error.response?.data?.message ||
-          "Failed to load repositories."
+        "Failed to load repositories."
       );
     } finally {
       setLoading(false);
@@ -87,24 +86,7 @@ const AdminRepositoriesPage = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#0e1015] text-[#f6f1e8]">
-      <div className="flex min-h-screen">
-
-        {/* Desktop Sidebar */}
-        <div className="hidden lg:block">
-          <AdminSidebar />
-        </div>
-
-        {/* Main */}
-        <div className="min-w-0 flex-1">
-
-          {/* Topbar */}
-          <header className="h-[72px] border-b border-zinc-800 bg-[#0e1015]">
-            <AdminTopbar />
-          </header>
-
-          {/* Content */}
-          <div className="p-4 sm:p-7 lg:p-8">
+    <div className="p-4 sm:p-7 lg:p-8">
 
             {/* Heading */}
             <section className="mb-7">
@@ -431,9 +413,7 @@ const AdminRepositoriesPage = () => {
 
             </section>
           </div>
-        </div>
-      </div>
-    </main>
+       
   );
 };
 

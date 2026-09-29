@@ -15,6 +15,8 @@ import AdminRoute from "./components/AdminRoute";
 import AdminUsers from "./pages/AdminUsersPage";
 import AdminRepositories from "./pages/AdminRepositoriesPage";
 import AdminCodeFiles from "./pages/AdminCodeFilesPage";
+import AdminLayout from "./layout/AdminLayout";
+
 
 const App = () => {
   return (
@@ -22,27 +24,16 @@ const App = () => {
 
       <Route element={<Layout />}>
 
-        <Route
-          path="/dashboard"
-          element={<HomePage />}
-        />
+        <Route path="/dashboard" element={<HomePage />} />
 
-        <Route
-          path="/repo/:repoId"
-          element={<ProjectPage />}
-        />
+        <Route path="/repo/:repoId" element={<ProjectPage />} />
+        
 
       </Route>
 
-      <Route
-        path="/login"
-        element={<Login />}
-      />
+      <Route path="/login" element={<Login />} />
 
-      <Route
-        path="/register"
-        element={<SignupPage />}
-      />
+      <Route path="/register" element={<SignupPage />} />
 
       <Route
         path="/verify-email/pending"
@@ -55,31 +46,20 @@ const App = () => {
       />
 
       <Route element={<AdminRoute />}>
-        <Route
-          path="/admin"
-          element={<AdminPage />}
-        />
-
-        <Route
-          path="/admin/users"
-          element={<AdminUsers />}
-        />
-
-        <Route
-          path="/admin/repositories"
-          element={<AdminRepositories />}
-        />
-
-        <Route
-          path="/admin/codefiles"
-          element={<AdminCodeFiles />}
-        />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminPage />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="repositories" element={<AdminRepositories />} />
+          <Route path="codefiles" element={<AdminCodeFiles />} />
+        </Route>
       </Route>
+
 
       <Route
         path="/"
         element={<IndexPage />}
       />
+
 
     </Routes>
   );
