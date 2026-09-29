@@ -4,6 +4,7 @@ import { useOutletContext } from "react-router-dom";
 import Header from "../components/Header";
 import DotField from "../bg/DotField";
 import CreateProject from "../components/CreateProject";
+import SignInButton from "../components/SignInButton";
 
 const HomePage = () => {
 
@@ -19,10 +20,14 @@ const HomePage = () => {
       <div className="relative z-10">
         <Header />
 
-        <CreateProject
-          fetchProjects={fetchProjects}
-          user={user}
-        />
+
+
+
+        <div className="flex flex-col items-center">
+          <CreateProject fetchProjects={fetchProjects} user={user} />
+
+          {!user && <SignInButton />}
+        </div>
       </div>
 
 

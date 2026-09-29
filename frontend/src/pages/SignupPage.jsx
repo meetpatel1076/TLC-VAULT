@@ -60,7 +60,7 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="min-h-screen bg-zinc-950 p-4 text-[#f6f1e8] sm:p-6">
+    <main className="min-h-screen bg-primary p-4 text-[#f6f1e8] sm:p-6">
       <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-[1380px] grid-cols-1 gap-4 sm:min-h-[calc(100vh-3rem)] lg:grid-cols-[1.02fr_0.98fr]">
 
         {/* LEFT SIDE */}
@@ -110,7 +110,7 @@ export default function SignupPage() {
         </section>
 
         {/* RIGHT SIDE */}
-        <section className="flex min-h-[620px] items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900 px-6 py-12 sm:px-10 lg:px-16">
+        <section className="flex min-h-[620px] items-center justify-center rounded-2xl  bg-zinc-950 px-6 py-12 sm:px-10 lg:px-16">
           <div className="w-full max-w-[470px]">
             <div className="mb-9">
               <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.28em] text-[#f36631]">
