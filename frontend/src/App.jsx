@@ -6,6 +6,8 @@ import ProjectPage from "./pages/ProjectPage";
 import Layout from "./layout/layout";
 import Login from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import EmailVerificationPendingPage from "./pages/EmailVerificationPendingPage";
+import VerifyEmailPage from "./pages/VerifyEmailPage";
 import IndexPage from "./pages/Index";
 
 import AdminPage from "./pages/AdminPage";
@@ -40,6 +42,16 @@ const App = () => {
       <Route
         path="/register"
         element={<SignupPage />}
+      />
+
+      <Route
+        path="/verify-email/pending"
+        element={<EmailVerificationPendingPage />}
+      />
+
+      <Route
+        path="/verify-email"
+        element={<VerifyEmailPage />}
       />
 
       <Route element={<AdminRoute />}>

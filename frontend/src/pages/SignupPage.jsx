@@ -36,18 +36,21 @@ export default function SignupPage() {
       setLoading(true);
       setError("");
 
-      await api.post("/auth/register", {
+      const response = await api.post("/auth/register", {
         name: form.name.trim(),
         email: form.email.trim(),
         password: form.password,
       });
 
-      await api.post("/auth/login", {
-        email: form.email.trim(),
-        password: form.password,
-      });
-
-      navigate("/dashboard");
+      navigate(
+        `/verify-email/pending?email=${encodeURIComponent(form.email.trim())}`,
+        {
+          replace: true,
+          state: {
+            emailSent: response.data?.emailSent !== false,
+          },
+        }
+      );
 
     } catch (err) {
       setError(

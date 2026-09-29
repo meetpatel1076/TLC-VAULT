@@ -54,6 +54,22 @@ export default function LoginPage() {
       }
 
     } catch (err) {
+      if (err.response?.data?.code === "EMAIL_NOT_VERIFIED") {
+        const email = err.response?.data?.email || form.email.trim();
+
+        navigate(
+          `/verify-email/pending?email=${encodeURIComponent(email)}`,
+          {
+            state: {
+              emailSent: false,
+              loginAttempt: true,
+            },
+          }
+        );
+
+        return;
+      }
+
       setError(
         err.response?.data?.message ||
         "Unable to sign in."
