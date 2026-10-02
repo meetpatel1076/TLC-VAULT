@@ -9,9 +9,11 @@ export default function SignupPage() {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -27,8 +29,18 @@ export default function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.name.trim() || !form.email.trim() || !form.password) {
+    if (
+      !form.name.trim() ||
+      !form.email.trim() ||
+      !form.password ||
+      !form.confirmPassword
+    ) {
       setError("Please fill in all fields.");
+      return;
+    }
+
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match.");
       return;
     }
 
@@ -204,6 +216,58 @@ export default function SignupPage() {
                     {showPassword ? "Hide" : "Show"}
                   </button>
                 </div>
+              </div>
+
+              {/* Confirm Password */}
+              <div>
+                <label
+                  htmlFor="confirmPassword"
+                  className="mb-2 block text-xs font-medium text-zinc-300"
+                >
+                  Confirm password
+                </label>
+
+                <div className="relative">
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={form.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="Confirm your password"
+                    autoComplete="new-password"
+                    required
+                    className={`h-12 w-full rounded-lg border bg-zinc-800 px-4 pr-16 text-sm text-[#f6f1e8] outline-none transition placeholder:text-zinc-600 focus:ring-2 ${form.confirmPassword &&
+                        form.password !== form.confirmPassword
+                        ? "border-red-700 focus:border-red-600 focus:ring-red-600/10"
+                        : form.confirmPassword &&
+                          form.password === form.confirmPassword
+                          ? "border-green-700 focus:border-green-600 focus:ring-green-600/10"
+                          : "border-zinc-700 focus:border-[#f36631] focus:ring-[#f36631]/10"
+                      }`}
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword((prev) => !prev)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 px-2 py-1 text-xs text-zinc-500 transition hover:text-[#f36631]"
+                  >
+                    {showConfirmPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
+
+                {form.confirmPassword && (
+                  <p
+                    className={`mt-2 text-xs ${form.password === form.confirmPassword
+                        ? "text-green-500"
+                        : "text-red-400"
+                      }`}
+                  >
+                    {form.password === form.confirmPassword
+                      ? "Passwords match."
+                      : "Passwords do not match."}
+                  </p>
+                )}
               </div>
 
               {error && (
