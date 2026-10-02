@@ -39,22 +39,25 @@ const CreateProject = ({ fetchProjects, user }) => {
       );
     } finally {
       setLoading(false);
+      setTitle("")
+      setDescription("")
+      setIsOpen(false)
     }
   };
 
   return (
-    <div className="px-10 pb-10 flex justify-center">
+    <div className="px-5 mt-3">
 
       <div
         className={`
-          w-130 max-w-3xl
+         w-full
           rounded-2xl
           border border-[#30343d]
           bg-[#111318]/90
           backdrop-blur-sm
           overflow-hidden
           transition-all duration-300 ease-in-out
-          ${isOpen ? "max-h-[500px]" : "max-h-[64px]"}
+          ${isOpen ? "max-h-[450px]" : "max-h-[56px]"}
         `}
       >
 
@@ -68,7 +71,7 @@ const CreateProject = ({ fetchProjects, user }) => {
 
             setIsOpen(!isOpen);
           }}
-          className="w-full h-16 px-5 flex items-center gap-3 text-white bg-[#f64f12] transition"
+          className="w-full h-14 px-5 flex items-center gap-3 text-white bg-[#f64f12] transition"
         >
 
           {isOpen ? (
@@ -106,7 +109,7 @@ const CreateProject = ({ fetchProjects, user }) => {
 
               <input
                 type="text"
-                placeholder="e.g. Portfolio Website"
+                placeholder="Portfolio Website"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="
@@ -131,11 +134,11 @@ const CreateProject = ({ fetchProjects, user }) => {
 
               <textarea
                 rows={4}
-                placeholder="What is this project about?"
+               
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="
-    w-full px-4 py-3
+    w-full px-4 py-3 h-22
     rounded-lg
     border border-[#30343d]
     bg-primary
@@ -155,7 +158,7 @@ const CreateProject = ({ fetchProjects, user }) => {
               className="
     h-10 px-5
     rounded-lg
-    bg-[#f64f12]
+    bg-secondary
     text-black
     text-sm font-medium
     hover:bg-[#f36631]

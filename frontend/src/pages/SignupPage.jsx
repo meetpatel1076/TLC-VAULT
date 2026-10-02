@@ -92,7 +92,7 @@ export default function SignupPage() {
           <Link to="/"
             className="absolute right-7 top-7 z-10 rounded-full border border-zinc-700 bg-zinc-950/60 px-3.5 py-1.5 text-xs text-zinc-400 backdrop-blur-sm transition hover:border-zinc-600 hover:text-[#f6f1e8] sm:right-9 sm:top-9"
           >
-            Back to website →
+            Back to website 
           </Link>
 
           {/* orange horizon */}

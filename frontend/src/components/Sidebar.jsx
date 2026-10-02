@@ -1,23 +1,24 @@
+
 import React from "react";
 
 import {
   Plus,
-  Box,
-  ChevronDown,
   MoreVertical,
   PanelLeftClose,
   PanelLeftOpen,
   LogOut,
 } from "lucide-react";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+
 import SlideCommit from "./SlideCommit";
 import api from "../services/api";
-
+import CreateProject from "./CreateProject";
 
 const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => {
   const location = useLocation();
   const navigate = useNavigate();
+
   const [loggingOut, setLoggingOut] = React.useState(false);
   const [deletingId, setDeletingId] = React.useState(null);
   const [deleteProject, setDeleteProject] = React.useState(null);
@@ -56,6 +57,7 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
       navigate("/login", { replace: true });
     }
   };
+
   return (
     <aside
       className={`
@@ -63,33 +65,37 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
         border-r border-[#252830]
         bg-sidebar
         flex flex-col
-        transition-all duration-300
-        ${collapsed ? "w-[72px]" : "w-[300px]"}
+        overflow-x-hidden
+        transition-all duration-300 ease-in-out
+        ${collapsed ? "w-[72px]" : "w-[350px]"}
       `}
     >
-
       {/* Header */}
       <div
         className={`
           flex items-center py-5
+          transition-all duration-300
           ${collapsed ? "justify-center px-3" : "justify-between px-5"}
         `}
       >
-
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-
-
-
-          {!collapsed && (
-            <span className="text-[17px] font-bold text-white whitespace-nowrap" style={{ fontFamily: "monospace" }}>
-              TLC Vault
-            </span>
-          )}
-
+        <div
+          className={`
+            overflow-hidden
+            transition-all duration-300 ease-in-out
+            ${collapsed
+              ? "w-0 opacity-0 -translate-x-3"
+              : "w-auto opacity-100 translate-x-0"
+            }
+          `}
+        >
+          <span
+            className="text-[17px] font-bold text-white whitespace-nowrap"
+            style={{ fontFamily: "monospace" }}
+          >
+            TLC Vault
+          </span>
         </div>
 
-        {/* Collapse button */}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="text-[#9ca3af] hover:text-white transition"
@@ -100,53 +106,74 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
             <PanelLeftClose size={21} />
           )}
         </button>
-
       </div>
 
-
-      {/* New Project */}
-      <div className={collapsed ? "px-3 mt-2" : "px-5 mt-2"}>
-
-        <button
-          onClick={() => navigate(user ? "/dashboard" : "/login")}
+      {/* New Repository */}
+      <div className="relative shrink-0">
+        {/* Collapsed Plus Button */}
+        <div
           className={`
-            h-[48px] rounded-xl
-            border border-[#30343d]
-            flex items-center
-            text-[#e5e7eb]
-            bg-[#f64f12]
-            transition
+            absolute left-0 right-0 top-0
+            flex justify-center
+            transition-all duration-300 ease-in-out
             ${collapsed
-              ? "w-full justify-center"
-              : "w-full gap-3 px-5"
+              ? "opacity-100 scale-100 translate-y-0"
+              : "opacity-0 scale-90 -translate-y-2 pointer-events-none"
             }
           `}
         >
+          <button
+            onClick={() => setCollapsed(false)}
+            className="
+              w-[56px] h-[56px]
+              rounded-xl
+              border border-[#30343d]
+              flex items-center justify-center
+              bg-[#f64f12]
+              text-white
+              hover:bg-[#ff6228]
+              transition-all duration-200
+              mt-3
+            "
+          >
+            <Plus size={21} strokeWidth={2.2} />
+          </button>
+        </div>
 
-          <Plus size={20} />
-
-          {!collapsed && (
-            <span className="font-medium">
-              New Repository
-            </span>
-          )}
-
-        </button>
-
+        {/* Create Repository */}
+        <div
+          className={`
+            transition-all duration-300 ease-in-out
+            ${collapsed
+              ? "max-h-0 opacity-0 -translate-x-2 pointer-events-none"
+              : "max-h-[520px] opacity-100 translate-x-0"
+            }
+          `}
+        >
+          <CreateProject
+            fetchProjects={fetchProjects}
+            user={user}
+          />
+        </div>
       </div>
 
-
+      {/* Repositories */}
       <div
         className={`
-    mt-12 px-5
-    transition-all duration-300 ease-out
-    ${collapsed
+          flex-1 min-h-0
+          px-5 mt-4
+          overflow-y-auto
+          overflow-x-hidden
+              [scrollbar-width:none]
+    [&::-webkit-scrollbar]:hidden
+          transition-all duration-300 ease-out
+          ${collapsed
             ? "opacity-0 -translate-x-3 pointer-events-none"
             : "opacity-100 translate-x-0"
           }
-  `}
+        `}
       >
-        <p className="px-3 mb-4 text-[14px] font-medium text-[#9ca3af]">
+        <p className="px-3 mb-4 text-[17px] font-medium text-white">
           Repositories
         </p>
 
@@ -164,28 +191,28 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
                 <div
                   key={project._id}
                   className={`
-          group w-full rounded-xl
-          flex items-center
-          transition-all duration-200
-          ${isSelected
+                    group w-full rounded-xl
+                    flex items-center
+                    transition-all duration-200
+                    ${isSelected
                       ? "bg-[#20232b] border border-[#2d313a]"
                       : "hover:bg-[#191c22]"
                     }
-        `}
+                  `}
                 >
                   <button
                     onClick={() => navigate(`/repo/${project._id}`)}
                     className={`
-            flex-1 min-w-0
-            text-[15px]
-            text-left
-            px-4 py-3
-            truncate
-            ${isSelected
+                      flex-1 min-w-0
+                      text-[15px]
+                      text-left
+                      px-4 py-3
+                      truncate
+                      ${isSelected
                         ? "text-white"
                         : "text-[#9ca3af] group-hover:text-white"
                       }
-          `}
+                    `}
                   >
                     {project.name}
                   </button>
@@ -194,16 +221,16 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
                     onClick={() => setDeleteProject(project)}
                     disabled={deletingId === project._id}
                     className="
-            mr-2 p-1.5
-            rounded-lg
-            text-[#717784]
-            opacity-0
-            group-hover:opacity-100
-            hover:text-red-400
-            hover:bg-[#272a31]
-            transition
-            disabled:opacity-50
-          "
+                      mr-2 p-1.5
+                      rounded-lg
+                      text-[#717784]
+                      opacity-0
+                      group-hover:opacity-100
+                      hover:text-red-400
+                      hover:bg-[#272a31]
+                      transition
+                      disabled:opacity-50
+                    "
                   >
                     <MoreVertical size={17} />
                   </button>
@@ -212,76 +239,87 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
             })}
           </div>
         )}
-
-
       </div>
 
-
-      {/* User */}
+      {/* Account - Fixed Bottom */}
       <div
         className={`
-          mt-auto border-t border-[#252830] py-4
+          shrink-0
+          border-t border-[#252830]
+          py-4
+          bg-sidebar
+          transition-all duration-300
           ${collapsed ? "px-3" : "px-5"}
         `}
       >
+        {/* Logout */}
+        <div
+          className={`
+            overflow-hidden
+            transition-all duration-300 ease-in-out
+            ${collapsed
+              ? "max-h-0 opacity-0 -translate-y-2 mb-0"
+              : "max-h-[60px] opacity-100 translate-y-0 mb-2.5"
+            }
+          `}
+        >
+          {user && (
+            <SlideCommit
+              label="Swipe to log out"
+              onConfirm={handleLogout}
+              trackColor="#27272a"
+              handleColor="#a1a1aa"
+              successColor="#f64f12"
+              dangerColor="#ef4444"
+              width={300}
+              height={52}
+              radius={12}
+              holdMs={0}
+              disabled={loggingOut}
+              icon={<LogOut size={19} strokeWidth={2} />}
+            />
+          )}
+        </div>
 
-        {/* Logout swipe action */}
-       {!collapsed && user && (
-  <SlideCommit
-    label="Swipe to log out"
-    onConfirm={handleLogout}
-    trackColor="#27272a"
-    handleColor="#a1a1aa"
-    successColor="#f64f12"
-    dangerColor="#ef4444"
-    width={260}
-    height={52}
-    radius={12}
-    holdMs={0}
-    disabled={loggingOut}
-    icon={<LogOut size={19} strokeWidth={2} />}
-    className="mb-2.5"
-  />
-)}
-
-
+        {/* User */}
         <div
           className={`
             flex items-center
+            transition-all duration-300
             ${collapsed ? "justify-center" : "gap-3"}
           `}
         >
-
-          {/* Avatar */}
           <div className="w-10 h-10 shrink-0 rounded-full bg-[#292d35] border border-[#3a3e47] flex items-center justify-center">
             <span className="text-sm font-medium text-white">
               {user?.email?.charAt(0).toUpperCase() || "U"}
             </span>
           </div>
 
-          {!collapsed && (
-            <>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-white">
-                  {user?.name || "User"}
-                </p>
+          <div
+            className={`
+              overflow-hidden
+              transition-all duration-300 ease-in-out
+              ${collapsed
+                ? "w-0 opacity-0 translate-x-2"
+                : "flex-1 opacity-100 translate-x-0"
+              }
+            `}
+          >
+            <p className="text-sm font-semibold text-white whitespace-nowrap">
+              {user?.name || "User"}
+            </p>
 
-                <p className="text-xs text-[#9ca3af] truncate">
-                  {user?.email || ""}
-                </p>
-              </div>
-
-
-            </>
-          )}
-
+            <p className="text-xs text-[#9ca3af] truncate">
+              {user?.email || ""}
+            </p>
+          </div>
         </div>
-
       </div>
+
+      {/* Delete Modal */}
       {deleteProject && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4">
           <div className="w-full max-w-md rounded-2xl border border-[#30343d] bg-[#111318] p-6 shadow-2xl">
-
             <h2 className="text-lg font-semibold text-white">
               Delete project?
             </h2>
@@ -298,7 +336,13 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
               <button
                 onClick={() => setDeleteProject(null)}
                 disabled={deletingId}
-                className="rounded-lg px-4 py-2 text-sm text-[#9ca3af] hover:bg-[#191c22] hover:text-white transition"
+                className="
+                  rounded-lg px-4 py-2
+                  text-sm text-[#9ca3af]
+                  hover:bg-[#191c22]
+                  hover:text-white
+                  transition
+                "
               >
                 Cancel
               </button>
@@ -306,18 +350,25 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
               <button
                 onClick={() => handleDeleteProject(deleteProject._id)}
                 disabled={deletingId}
-                className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 disabled:opacity-50 transition"
+                className="
+                  rounded-lg
+                  bg-red-500
+                  px-4 py-2
+                  text-sm font-medium text-white
+                  hover:bg-red-600
+                  disabled:opacity-50
+                  transition
+                "
               >
                 {deletingId ? "Deleting..." : "Delete Project"}
               </button>
             </div>
-
           </div>
         </div>
       )}
-
     </aside>
   );
 };
 
 export default Sidebar;
+

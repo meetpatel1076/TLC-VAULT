@@ -23,11 +23,7 @@ const HomePage = () => {
 
 
 
-        <div className="flex flex-col items-center">
-          <CreateProject fetchProjects={fetchProjects} user={user} />
-
-          {!user && <SignInButton />}
-        </div>
+        
       </div>
 
 
