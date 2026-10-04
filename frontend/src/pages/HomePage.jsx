@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import DotField from "../bg/DotField";
 import CreateProject from "../components/CreateProject";
 import SignInButton from "../components/SignInButton";
+import Dashboard from "../components/dashboard/Dashboard";
 
 const HomePage = () => {
 
@@ -17,13 +18,9 @@ const HomePage = () => {
         <DotField />
       </div>
 
-      <div className="relative z-10">
-        <Header />
-
-
-
-
+      <div className="relative z-10 mt-21">
         
+        <Dashboard />
       </div>
 
 
