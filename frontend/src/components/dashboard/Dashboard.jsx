@@ -60,7 +60,7 @@ const Dashboard = () => {
   }
 
   return (
-    <section className="px-6 lg:px-10 pb-10">
+    <section className="px-1.5 lg:px-10 pb-10">
 
       {/* TOP ROW */}
       <div className="grid grid-cols-1 lg:grid-cols-[1.65fr_0.75fr] gap-4">

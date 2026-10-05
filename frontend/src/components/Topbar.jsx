@@ -33,7 +33,7 @@ const Topbar = ({ collapsed, user }) => {
             
 
             {/* Center Brand */}
-            <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3">
+            <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3 hidden md:block">
                 <span className="text-[11px] uppercase tracking-[0.3em] text-[#666b75]">
                     The Last Commit
                 </span>
@@ -50,7 +50,7 @@ const Topbar = ({ collapsed, user }) => {
 
             {/* your existing content */}
 
-            <div className=' '>
+            <div className='hidden md:block'>
                 
 
                 <div className="ml-10 w-8 h-8 rounded-full bg-[#292d35] flex items-center justify-center">

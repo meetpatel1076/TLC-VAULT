@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -13,12 +14,12 @@ const Layout = () => {
   const fetchProjects = async () => {
     try {
       const response = await api.get("/repositories");
-
       setProjects(response.data.repositories);
     } catch (error) {
       console.error("Failed to fetch projects:", error);
     }
   };
+
   const fetchUser = async () => {
     try {
       const response = await api.get("/auth/me");
@@ -34,8 +35,7 @@ const Layout = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-primary">
-
+    <div className="min-h-screen min-w-0 bg-primary overflow-x-hidden">
       <Sidebar
         collapsed={collapsed}
         setCollapsed={setCollapsed}
@@ -46,7 +46,7 @@ const Layout = () => {
 
       <div
         className={`
-          relative min-h-screen
+          relative min-h-screen min-w-0 overflow-x-hidden
           transition-all duration-300
           ${collapsed ? "ml-[72px]" : "ml-[350px]"}
         `}
@@ -55,7 +55,6 @@ const Layout = () => {
 
         <Outlet context={{ fetchProjects, user }} />
       </div>
-
     </div>
   );
 };
