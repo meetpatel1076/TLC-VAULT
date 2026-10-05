@@ -79,8 +79,8 @@ export default function SignupPage() {
       <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-[1380px] grid-cols-1 gap-4 sm:min-h-[calc(100vh-3rem)] lg:grid-cols-[1.02fr_0.98fr]">
 
         {/* LEFT SIDE */}
-        <section className="relative min-h-[480px] overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 sm:min-h-[620px] lg:min-h-0">
-
+        <section className="hidden relative min-h-[480px] overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 sm:min-h-[620px] lg:block lg:min-h-0">
+          
           {/* subtle orange atmosphere */}
           <div className="pointer-events-none absolute -bottom-40 left-[-10%] h-[480px] w-[620px] rounded-full bg-[#f36631]/20 blur-[110px]" />
 
