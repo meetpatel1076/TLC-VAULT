@@ -1,7 +1,10 @@
 import { Search } from 'lucide-react'
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const Topbar = ({ collapsed, user }) => {
+    const navigate = useNavigate()
     return (
         <header
             className={`
@@ -12,17 +15,22 @@ const Topbar = ({ collapsed, user }) => {
         flex items-center justify-end px-7
         transition-all duration-300
         z-50
-        ${collapsed ? "left-[72px]" : "left-[300px]"}
+        ${collapsed ? "left-[72px]" : "left-[350px]"}
       `}
         >
             {/* Topbar Logo */}
+            
             <div className="absolute left-6 flex items-center">
+                <Link to="/dashboard" >
+               
                 <img
                     src="/tlc-vault-logo.png"
                     alt="TLC Vault"
                     className="h-9 w-9 object-contain"
                 />
+                </Link>
             </div>
+            
 
             {/* Center Brand */}
             <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3">

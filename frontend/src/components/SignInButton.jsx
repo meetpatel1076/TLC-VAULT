@@ -7,7 +7,7 @@ const SignInButton = () => {
   return (
     <button
       onClick={() => navigate("/login")}
-      className="h-14 w-80 px-6 rounded-lg font-semibold bg-zinc-900 text-md text-zinc-300 transition hover:bg-zinc-800 hover:text-white"
+      className="h-11 px-5 rounded-lg font-semibold bg-zinc-900 text-sm text-zinc-300 transition hover:bg-zinc-800 hover:text-white"
     >
       Sign in / Login
     </button>

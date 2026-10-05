@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams, useSearchParams} from "react-router-dom";
 import { Pencil } from "lucide-react";
 import api from "../services/api";
 import NewCodeEditor from "../components/NewCodeEditor";
 import SavedCodeEditor from "../components/SavedCodeEditor";
 
 
+
 const ProjectPage = () => {
+  const [searchParams] = useSearchParams();
+
+  const selectedFileId = searchParams.get("file");
   const pageRef = useRef(null);
   const { repoId } = useParams();
   const { fetchProjects } = useOutletContext();
@@ -31,6 +35,22 @@ const ProjectPage = () => {
       setError(err.response?.data?.message || "Failed to load code files.");
     }
   };
+  useEffect(() => {
+    if (!selectedFileId || files.length === 0) return;
+
+    const element = document.getElementById(
+      `code-file-${selectedFileId}`
+    );
+
+    if (!element) return;
+
+    setTimeout(() => {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 100);
+  }, [selectedFileId, files]);
 
   useEffect(() => {
     const getProject = async () => {
@@ -77,14 +97,14 @@ const ProjectPage = () => {
 
   if (loading)
     return (
-      <main className="min-h-screen bg-primary text-white pt-20 px-10">
+      <main className="min-h-screen bg-primary text-white pt-20 px-20">
         Loading repository...
       </main>
     );
 
   if (!project)
     return (
-      <main className="min-h-screen bg-primary text-red-400 pt-20 px-10">
+      <main className="min-h-screen bg-primary text-red-400 pt-20 px-20">
         {error || "Project not found."}
       </main>
     );
@@ -94,7 +114,7 @@ const ProjectPage = () => {
     description.trim() !== (project.description || "");
 
   return (
-    <main ref={pageRef} className="min-h-screen bg-primary text-white pt-20 px-10">
+    <main ref={pageRef} className="min-h-screen bg-primary text-white pt-20 px-20">
       <div className="max-w-5xl mb-6 mx-auto  ">
 
 
@@ -207,13 +227,17 @@ const ProjectPage = () => {
         />
         <div className="mt-10 space-y-6">
           {files.map((file) => (
-            <SavedCodeEditor
+            <div
               key={file._id}
-              file={file}
-              onUpdated={getFiles}
-              onDeleted={getFiles}
-              pageRef={pageRef}
-            />
+              id={`code-file-${file._id}`}
+            >
+              <SavedCodeEditor
+                file={file}
+                onUpdated={getFiles}
+                onDeleted={getFiles}
+                pageRef={pageRef}
+              />
+            </div>
           ))}
         </div>
       </div>

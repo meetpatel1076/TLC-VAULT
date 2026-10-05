@@ -48,7 +48,7 @@ const Layout = () => {
         className={`
           relative min-h-screen
           transition-all duration-300
-          ${collapsed ? "ml-[72px]" : "ml-[300px]"}
+          ${collapsed ? "ml-[72px]" : "ml-[350px]"}
         `}
       >
         <Topbar collapsed={collapsed} user={user} />

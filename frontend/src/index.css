@@ -77,6 +77,8 @@ body::-webkit-scrollbar {
   --color-sidebar: #09090b;
   
   --color-primary: #000000;
+  
+  --color-secondary:#f64f12;
 }
 .no-scrollbar {
   scrollbar-width: none;
