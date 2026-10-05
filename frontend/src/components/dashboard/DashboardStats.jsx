@@ -74,7 +74,11 @@ const DashboardStats = ({ summary }) => {
           </p>
 
           {/* Repository List */}
-          <div className="mt-6 space-y-3">
+          {/* Repository List */}
+          <div
+  className="mt-6 space-y-3 max-h-[150px] overflow-y-auto"
+  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+>
             {repoList.map((repo) => (
               <div
                 key={repo._id}
@@ -115,8 +119,12 @@ const DashboardStats = ({ summary }) => {
           </p>
 
           {/* Languages */}
-          <div className="mt-6 space-y-3">
-            {languages.slice(0, 5).map((item) => (
+          {/* Languages */}
+          <div
+  className="mt-6 space-y-3 max-h-[150px] overflow-y-auto"
+  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+>
+            {languages.map((item) => (
               <div
                 key={item.language}
                 className="flex items-center justify-between"

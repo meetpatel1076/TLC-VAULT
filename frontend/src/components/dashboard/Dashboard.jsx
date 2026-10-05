@@ -50,7 +50,7 @@ const Dashboard = () => {
   if (error) {
     return (
       <section className="px-6 lg:px-10 pb-10">
-        <div className="rounded-2xl border border-[#252830] bg-[#111318]/80 px-5 py-4">
+        <div className="flex justify-center">
           <p className="text-sm text-[#9ca3af]">
             {error}
           </p>
