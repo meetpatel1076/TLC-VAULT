@@ -154,7 +154,7 @@ const ProjectPage = () => {
       <div className="w-full max-w-5xl min-w-0 mx-auto mb-6">
 
         {/* ================= PROJECT TITLE ================= */}
-        <div className="flex flex-col sm:flex-row sm:items-start gap-3 min-w-0">
+        <div className="flex flex-row items-start gap-2 sm:gap-3 min-w-0">
 
           <div className="flex-1 min-w-0">
             {editingTitle ? (
@@ -165,7 +165,7 @@ const ProjectPage = () => {
                 className="
                   w-full
                   min-w-0
-                  text-2xl
+                  text-base
                   sm:text-3xl
                   lg:text-4xl
                   font-semibold
@@ -177,7 +177,7 @@ const ProjectPage = () => {
             ) : (
               <h1
                 className="
-                  text-2xl
+                  text-base
                   sm:text-3xl
                   lg:text-4xl
                   font-semibold
@@ -190,13 +190,14 @@ const ProjectPage = () => {
           </div>
 
           {/* Title Controls */}
-          <div className="w-full sm:w-32 shrink-0 flex flex-row sm:flex-col gap-1 sm:items-end">
+          <div className="shrink-0 flex flex-row items-start gap-1">
 
             {!editingTitle ? (
               <button
                 onClick={() => setEditingTitle(true)}
                 className="
-                  p-2
+                  p-1.5
+                  sm:p-2
                   rounded-lg
                   text-[#717784]
                   hover:text-white
@@ -250,7 +251,7 @@ const ProjectPage = () => {
         </div>
 
         {/* ================= DESCRIPTION ================= */}
-        <div className="mt-4 flex flex-col sm:flex-row sm:items-start gap-3 min-w-0">
+        <div className="mt-4 flex flex-row items-start gap-2 sm:gap-3 min-w-0">
 
           <div className="flex-1 min-w-0">
             {editingDescription ? (
@@ -277,7 +278,7 @@ const ProjectPage = () => {
           </div>
 
           {/* Description Controls */}
-          <div className="w-full sm:w-32 shrink-0 flex flex-row sm:flex-col gap-1 sm:items-end">
+          <div className="shrink-0 flex flex-row items-start gap-1">
 
             {!editingDescription ? (
               <button

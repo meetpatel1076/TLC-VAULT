@@ -7,6 +7,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   LogOut,
+  X,
 } from "lucide-react";
 
 import { useLocation, useNavigate, Link } from "react-router-dom";
@@ -15,7 +16,7 @@ import SlideCommit from "./SlideCommit";
 import api from "../services/api";
 import CreateProject from "./CreateProject";
 
-const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => {
+const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user, isMobileDrawer = false, mobileOpen = false, onMobileClose }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -61,13 +62,16 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
   return (
     <aside
       className={`
-        fixed left-0 top-0 z-50 h-screen
+        fixed left-0 top-0 h-screen
         border-r border-[#252830]
         bg-sidebar
         flex flex-col
         overflow-x-hidden
-        transition-all duration-300 ease-in-out
-        ${collapsed ? "w-[72px]" : "w-[350px]"}
+        transition-transform duration-300 ease-in-out
+        ${isMobileDrawer
+          ? `z-[70] w-[min(350px,88vw)] ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`
+          : `z-50 transition-all ${collapsed ? "w-[72px]" : "w-[350px]"}`
+        }
       `}
     >
       {/* Header */}
@@ -96,16 +100,25 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
           </span>
         </div>
 
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="text-[#9ca3af] hover:text-white transition"
-        >
-          {collapsed ? (
-            <PanelLeftOpen size={21} />
-          ) : (
-            <PanelLeftClose size={21} />
-          )}
-        </button>
+        {isMobileDrawer ? (
+          <button
+            type="button"
+            onClick={onMobileClose}
+            aria-label="Close navigation menu"
+            className="rounded-lg p-2 text-[#9ca3af] hover:bg-[#191c22] hover:text-white transition"
+          >
+            <X size={21} />
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setCollapsed(!collapsed)}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            className="text-[#9ca3af] hover:text-white transition"
+          >
+            {collapsed ? <PanelLeftOpen size={21} /> : <PanelLeftClose size={21} />}
+          </button>
+        )}
       </div>
 
       {/* New Repository */}
@@ -201,7 +214,10 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user }) => 
                   `}
                 >
                   <button
-                    onClick={() => navigate(`/repo/${project._id}`)}
+                    onClick={() => {
+                      navigate(`/repo/${project._id}`);
+                      if (isMobileDrawer) onMobileClose?.();
+                    }}
                     className={`
                       flex-1 min-w-0
                       text-[15px]

@@ -8,6 +8,7 @@ const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [tailwindcss(), react()],
+  
   build: {
     rollupOptions: {
       input: {
