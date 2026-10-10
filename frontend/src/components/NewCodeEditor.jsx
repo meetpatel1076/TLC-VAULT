@@ -46,7 +46,7 @@ int main() {
   };
   const editorHeight = Math.min(
     Math.max(100, code.split("\n").length * 20 + 32),
-    600
+    400
   );
 
   return (
