@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tlc-vault.vercel.app/sitemap.xml
+Sitemap: https://vault.thelastcommit.xyz/sitemap.xml
