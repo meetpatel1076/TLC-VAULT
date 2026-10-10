@@ -4,11 +4,12 @@ import {
   ArrowDownRight,
   ArrowRight,
   Check,
-  Code2,
   Copy,
   Folder,
   LockKeyhole,
-  MoveUpRight,
+  Terminal,
+  Trophy,
+  Activity,
 } from "lucide-react";
 
 const codeLines = [
@@ -235,6 +236,13 @@ export default function LandingPage() {
 
         {/* actions */}
         <div className="flex items-center gap-2">
+          <Link
+            to="/features"
+            className="hidden rounded-full px-3 py-2 text-xs font-medium text-zinc-500 transition hover:text-[#f6f1e8] sm:inline-flex"
+          >
+            Features
+          </Link>
+
           <Link
             to="/login"
             className="rounded-full px-3.5 py-2 text-xs font-medium text-zinc-500 transition hover:text-[#f6f1e8]"
@@ -585,6 +593,41 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* PRODUCT FEATURES */}
+      <section className="relative z-10 border-b border-white/[0.07] bg-[#111317] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div>
+              <TinyLabel orange>More inside the vault</TinyLabel>
+              <h2 className="mt-5 max-w-2xl text-4xl font-medium leading-[0.95] tracking-[-0.055em] sm:text-5xl">
+                Save it. Run it. Keep showing up.
+              </h2>
+            </div>
+            <Link to="/features" className="group inline-flex w-fit items-center gap-2 border-b border-[#f36631]/60 pb-2 text-sm text-[#f6f1e8] transition hover:text-[#f36631]">
+              Explore all features
+              <ArrowRight size={14} strokeWidth={1.7} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-px overflow-hidden border border-white/[0.07] bg-white/[0.07] md:grid-cols-3">
+            {[
+              { icon: Terminal, title: "Compile in your workspace", text: "Run supported code through the embedded compiler without manually moving it to another website." },
+              { icon: Trophy, title: "Recognize your milestones", text: "Badges give your progress visible milestones as you build a consistent coding routine." },
+              { icon: Activity, title: "See your weekly progress", text: "Review active days, code-file activity, and repository activity from the past week." },
+            ].map((feature) => {
+              const Icon = feature.icon;
+              return (
+                <article key={feature.title} className="bg-[#111317] p-6 sm:p-8">
+                  <Icon size={21} strokeWidth={1.5} className="text-[#f36631]" aria-hidden="true" />
+                  <h3 className="mt-6 text-lg font-medium text-[#f6f1e8]">{feature.title}</h3>
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-zinc-500">{feature.text}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* BRAND */}
       <section className="relative z-10 border-b border-white/[0.07]">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
@@ -689,6 +732,13 @@ export default function LandingPage() {
         </div>
 
         <div className="flex items-center gap-5">
+          <Link
+            to="/features"
+            className="transition hover:text-zinc-300"
+          >
+            Features
+          </Link>
+
           <Link
             to="/login"
             className="transition hover:text-zinc-300"
