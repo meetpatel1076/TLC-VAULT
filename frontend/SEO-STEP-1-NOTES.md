@@ -16,7 +16,7 @@ This patch is intended to be merged into the existing TLC Vault Vite + React fro
 ## Before deployment
 
 1. Merge the files at the matching paths into the existing frontend project. Do not delete your own `public` assets such as `tlc-vault-logo.png` or `public/fonts` if they exist in your local project. The ZIP originally provided for this patch did not contain those assets.
-2. The SEO URLs currently use `https://tlc-vault.vercel.app` because the custom domain has not yet been connected to Vercel. After `https://vault.thelastcommit.xyz` is connected and working, update the canonical origin and URLs in `index.html`, `features.html`, `src/components/SEO.jsx`, `src/App.jsx`, `public/sitemap.xml`, and `public/robots.txt` to the custom domain.
+2. The SEO URLs currently use `https://vault.thelastcommit.xyz` because the custom domain has not yet been connected to Vercel. After `https://vault.thelastcommit.xyz` is connected and working, update the canonical origin and URLs in `index.html`, `features.html`, `src/components/SEO.jsx`, `src/App.jsx`, `public/sitemap.xml`, and `public/robots.txt` to the custom domain.
 3. Run `npm run build` locally. Fix any build errors before deploying.
 4. Test `/`, `/features`, `/login`, `/register`, and `/dashboard`. Confirm that Features navigation works and private pages have `noindex` metadata after the app loads.
 5. Confirm that `/robots.txt`, `/sitemap.xml`, and `/favicon.svg` are accessible in the deployed site.

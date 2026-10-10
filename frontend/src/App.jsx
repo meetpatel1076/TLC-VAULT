@@ -24,7 +24,7 @@ const HOME_SCHEMA = {
   "@type": "WebSite",
   name: "TLC Vault",
   alternateName: "TLC-Vault",
-  url: "https://tlc-vault.vercel.app/",
+  url: "https://vault.thelastcommit.xyz/",
   description:
     "A browser-based workspace to save code, run supported programs, and track coding consistency.",
 };

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 // Keep this aligned with the public production URL. Update it when
 // vault.thelastcommit.xyz is connected and set as the canonical domain.
-const CANONICAL_ORIGIN = "https://tlc-vault.vercel.app";
+const CANONICAL_ORIGIN = "https://vault.thelastcommit.xyz";
 
 function upsertMeta(attribute, key, content) {
   let element = document.head.querySelector(`meta[${attribute}="${key}"]`);

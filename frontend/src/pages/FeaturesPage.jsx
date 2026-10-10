@@ -72,11 +72,11 @@ export default function FeaturesPage() {
     name: "TLC Vault Features",
     description:
       "Explore TLC Vault features for saving code, using an embedded compiler, and tracking coding consistency.",
-    url: "https://tlc-vault.vercel.app/features",
+    url: "https://vault.thelastcommit.xyz/features",
     isPartOf: {
       "@type": "WebSite",
       name: "TLC Vault",
-      url: "https://tlc-vault.vercel.app/",
+      url: "https://vault.thelastcommit.xyz/",
     },
   };
 
