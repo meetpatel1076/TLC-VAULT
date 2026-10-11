@@ -24,7 +24,7 @@ const CreateProject = ({ fetchProjects, user }) => {
 
       const newProject = response.data.repository;
 
-      console.log("CREATED PROJECT:", newProject);
+      
 
       // Refresh sidebar
       await fetchProjects();
