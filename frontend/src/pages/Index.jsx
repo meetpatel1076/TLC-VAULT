@@ -70,8 +70,8 @@ function AppWindow() {
               <div
                 key={name}
                 className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-[8px] ${active
-                    ? "bg-zinc-800 text-[#f6f1e8]"
-                    : "text-zinc-600"
+                  ? "bg-zinc-800 text-[#f6f1e8]"
+                  : "text-zinc-600"
                   }`}
               >
                 <Folder
@@ -286,9 +286,7 @@ export default function LandingPage() {
             </h1>
 
             <p className="mt-7 max-w-lg text-sm leading-6 text-zinc-500 sm:text-base sm:leading-7">
-              You practice at home. Then the college lab starts,
-              the laptop stays behind, and suddenly the code you
-              worked on is somewhere you cannot reach.
+              TLC Vault is a private, browser-based coding workspace built by The Last Commit. Save and organize your programming code at home, then access it from another computer when you need it in your college lab.
             </p>
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -416,8 +414,8 @@ export default function LandingPage() {
                     <div
                       key={item.number}
                       className={`py-6 ${index !== 2
-                          ? "border-b border-white/[0.07] sm:border-b-0 sm:border-r sm:border-white/[0.07]"
-                          : ""
+                        ? "border-b border-white/[0.07] sm:border-b-0 sm:border-r sm:border-white/[0.07]"
+                        : ""
                         } ${index !== 0
                           ? "sm:pl-6"
                           : ""
