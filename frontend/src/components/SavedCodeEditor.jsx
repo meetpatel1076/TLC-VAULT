@@ -66,12 +66,21 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
   const [compilerError, setCompilerError] = useState("");
   const [compilerFile, setCompilerFile] = useState(null);
   const [compilerSession, setCompilerSession] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const iframeRef = useRef(null);
   const compilerSectionRef = useRef(null);
 
   useEffect(() => {
     setCode(file.code || "");
   }, [file._id, file.code]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 639px)");
+    const updateMobile = () => setIsMobile(mediaQuery.matches);
+    updateMobile();
+    mediaQuery.addEventListener("change", updateMobile);
+    return () => mediaQuery.removeEventListener("change", updateMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setCopied(false);
@@ -249,19 +258,19 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
     <div className="overflow-hidden rounded-xl border border-[#30343d] bg-[#111318]">
       <div className="flex min-h-14 flex-wrap items-center justify-between gap-3 border-b border-[#30343d] px-4 py-3">
         <div className="flex min-w-0 items-center gap-3">
-          <span className="truncate font-medium text-white">{file.name}</span>
+          <span className="text-xs  truncate font-medium text-white">{file.name}</span>
           <span className="shrink-0 text-xs uppercase text-[#717784]">
             {file.language}
           </span>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1">
           <button
             type="button"
             onClick={handleRun}
             disabled={compilerLoading}
             title={compilerOpen ? "Close compiler" : "Run saved code with OneCompiler"}
-            className="flex items-center gap-2 rounded-lg border border-orange-400/30 bg-orange-400/10 px-3 py-1.5 text-sm text-orange-300 transition hover:bg-orange-400/20 disabled:cursor-wait disabled:opacity-60"
+            className="hidden items-center gap-2 rounded-lg border border-orange-400/30 bg-orange-400/10 px-3 py-1.5 text-sm text-orange-300 transition hover:bg-orange-400/20 disabled:cursor-wait disabled:opacity-60 lg:flex"
           >
             {compilerLoading ? (
               <LoaderCircle size={16} className="animate-spin" />
