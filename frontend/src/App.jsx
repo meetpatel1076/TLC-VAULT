@@ -8,6 +8,7 @@ import Login from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import EmailVerificationPendingPage from "./pages/EmailVerificationPendingPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import IndexPage from "./pages/Index";
 import FeaturesPage from "./pages/FeaturesPage";
 import SEO from "./components/SEO";
@@ -18,6 +19,7 @@ import AdminUsers from "./pages/AdminUsersPage";
 import AdminRepositories from "./pages/AdminRepositoriesPage";
 import AdminCodeFiles from "./pages/AdminCodeFilesPage";
 import AdminLayout from "./layout/AdminLayout";
+import AdminFeedbackPage from "./pages/AdminFeedbackPage";
 
 const HOME_SCHEMA = {
   "@context": "https://schema.org",
@@ -99,6 +101,14 @@ const App = () => {
           </NoIndex>
         }
       />
+      <Route
+        path="/reset-password"
+        element={
+          <NoIndex title="Reset your password">
+            <ResetPasswordPage />
+          </NoIndex>
+        }
+      />
 
       <Route element={<AdminRoute />}>
         <Route
@@ -113,6 +123,7 @@ const App = () => {
           <Route path="users" element={<AdminUsers />} />
           <Route path="repositories" element={<AdminRepositories />} />
           <Route path="codefiles" element={<AdminCodeFiles />} />
+          <Route path="/admin/feedback" element={<AdminFeedbackPage />} />
         </Route>
       </Route>
 

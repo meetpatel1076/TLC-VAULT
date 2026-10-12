@@ -6,6 +6,7 @@ import {
   FileCode2,
   Settings,
   LogOut,
+   MessageSquare,
 } from "lucide-react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import HoldButton from "../HoldButton";
@@ -33,6 +34,11 @@ const navigation = [
     path: "/admin/codefiles",
     icon: FileCode2,
   },
+  {
+  label: "Feedback & Issues",
+  path: "/admin/feedback",
+  icon: MessageSquare,
+},
 ];
 
 const AdminSidebar = () => {

@@ -8,6 +8,7 @@ import {
   PanelLeftOpen,
   LogOut,
   X,
+  MessageSquare,
 } from "lucide-react";
 
 import { useLocation, useNavigate, Link } from "react-router-dom";
@@ -16,7 +17,7 @@ import SlideCommit from "./SlideCommit";
 import api from "../services/api";
 import CreateProject from "./CreateProject";
 
-const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user, isMobileDrawer = false, mobileOpen = false, onMobileClose }) => {
+const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user, isMobileDrawer = false, mobileOpen = false, onMobileClose, onFeedbackClick, }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -268,6 +269,46 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user, isMob
           ${collapsed ? "px-3" : "px-5"}
         `}
       >
+
+        {/* Feedback — Subtle, Secondary Action */}
+        <div className="mb-3">
+          <button
+            type="button"
+            onClick={onFeedbackClick}
+            aria-label="Send feedback"
+            title={collapsed ? "Send feedback" : undefined}
+            className={`
+      group flex w-full items-center
+      rounded-lg py-2.5
+      text-[#858b98]
+      hover:bg-[#191c22] hover:text-[#d1d5db]
+      transition-colors duration-200
+      focus-visible:outline-none
+      focus-visible:ring-1 focus-visible:ring-[#454b57]
+      ${collapsed ? "justify-center px-0" : "gap-3 px-3"}
+    `}
+          >
+            <MessageSquare
+              size={17}
+              strokeWidth={1.7}
+              className="shrink-0"
+            />
+
+            <span
+              className={`
+        overflow-hidden whitespace-nowrap text-sm
+        transition-all duration-200
+        ${collapsed
+                  ? "w-0 opacity-0"
+                  : "flex-1 text-left opacity-100"
+                }
+      `}
+            >
+              Send Feedback
+            </span>
+          </button>
+        </div>
+
         {/* Logout */}
         <div
           className={`

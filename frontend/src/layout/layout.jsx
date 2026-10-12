@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
+import FeedbackModal from "../components/FeedbackModal";
 import api from "../services/api";
 
 const Layout = () => {
@@ -10,6 +11,7 @@ const Layout = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [projects, setProjects] = useState([]);
   const [user, setUser] = useState(null);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const fetchProjects = async () => {
     try {
@@ -53,6 +55,10 @@ const Layout = () => {
           projects={projects}
           fetchProjects={fetchProjects}
           user={user}
+          onFeedbackClick={() => {
+            setMobileMenuOpen(false);
+            setFeedbackOpen(true);
+          }}
         />
       </div>
 
@@ -75,6 +81,10 @@ const Layout = () => {
           isMobileDrawer
           mobileOpen={mobileMenuOpen}
           onMobileClose={() => setMobileMenuOpen(false)}
+          onFeedbackClick={() => {
+            setMobileMenuOpen(false);
+            setFeedbackOpen(true);
+          }}
         />
       </div>
 
@@ -93,6 +103,12 @@ const Layout = () => {
 
         <Outlet context={{ fetchProjects, user }} />
       </div>
+
+      <FeedbackModal
+        isOpen={feedbackOpen}
+        onClose={() => setFeedbackOpen(false)}
+        user={user}
+      />
     </div>
   );
 };
