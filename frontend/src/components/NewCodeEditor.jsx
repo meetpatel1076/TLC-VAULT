@@ -80,8 +80,8 @@ int main() {
         >
 
           {/* Language Selector */}
-          <div className="h-14 px-4 flex items-center justify-between border-t border-b border-[#30343d] bg-[#15171d]">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-3 border-t border-b border-[#30343d] bg-[#15171d] px-3 py-3 sm:h-14 sm:flex-row sm:items-center sm:justify-between sm:px-4 sm:py-0">
+            <div className="flex min-w-0 items-center justify-between gap-2 sm:justify-start sm:gap-3">
               <span>File Name</span>
 
               <input
@@ -89,17 +89,17 @@ int main() {
                 value={fileName}
                 onChange={(e) => setFileName(e.target.value)}
                 placeholder="main.cpp"
-                className="h-9 w-40 rounded-md border border-[#30343d] bg-[#111318] px-3 text-sm text-white outline-none"
+                className="h-9 min-w-0 w-full max-w-[10rem] rounded-lg border border-[#30343d] bg-[#0b0d11] px-3 text-sm text-white outline-none transition placeholder:text-[#626875] focus:border-[#f64f12] focus:ring-2 focus:ring-[#f64f12]/15 sm:w-40"
               />
             </div>
 
-            <div className="flex items-center gap-3">
-              <span>Language</span>
+            <div className="flex min-w-0 items-center justify-between gap-2 sm:justify-start sm:gap-3">
+              <span className="shrink-0 text-xs text-[#9ca3af] sm:text-sm">Language</span>
 
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="h-9 rounded-md border border-[#30343d] bg-[#111318] px-3 text-sm text-white outline-none"
+                className="h-10 min-w-0 w-full max-w-[14rem] flex-1 appearance-none rounded-lg border border-[#30343d] bg-[#0b0d11] px-3 text-sm text-white outline-none transition focus:border-[#f64f12] focus:ring-2 focus:ring-[#f64f12]/15 sm:w-48 sm:flex-none"
               >
                 <option value="cpp">C++</option>
                 <option value="javascript">JavaScript</option>
@@ -145,13 +145,13 @@ int main() {
 
 
           {/* Save */}
-          <div className="flex justify-end p-4 border-t border-[#30343d]">
+          <div className="flex justify-end border-t border-[#30343d] p-3 sm:p-4">
 
             <button
               onClick={handleSave}
               disabled={saving}
               className="
-    px-5 py-2
+    w-full px-5 py-2 sm:w-auto
     rounded-lg
     bg-[#f64f12]
     text-white
