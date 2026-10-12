@@ -8,6 +8,7 @@ import Login from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import EmailVerificationPendingPage from "./pages/EmailVerificationPendingPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import IndexPage from "./pages/Index";
 import FeaturesPage from "./pages/FeaturesPage";
 import SEO from "./components/SEO";
@@ -96,6 +97,14 @@ const App = () => {
         element={
           <NoIndex title="Verify your email">
             <VerifyEmailPage />
+          </NoIndex>
+        }
+      />
+      <Route
+        path="/reset-password"
+        element={
+          <NoIndex title="Reset your password">
+            <ResetPasswordPage />
           </NoIndex>
         }
       />

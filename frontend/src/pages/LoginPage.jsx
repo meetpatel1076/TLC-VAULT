@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ForgotPasswordModal from "../components/ForgotPasswordModal";
 
 import api from "../services/api";
 
@@ -13,6 +14,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
 
   const handleChange = (e) => {
     setForm((prev) => ({
@@ -116,7 +118,7 @@ export default function LoginPage() {
           <Link to="/"
             className="absolute right-7 top-7 z-10 rounded-full border border-zinc-700 bg-zinc-950/60 px-3.5 py-1.5 text-xs text-zinc-400 backdrop-blur-sm transition hover:border-zinc-600 hover:text-[#f6f1e8] sm:right-9 sm:top-9"
           >
-            Back to website 
+            Back to website
           </Link>
 
           {/* Left copy */}
@@ -187,10 +189,8 @@ export default function LoginPage() {
 
                   <button
                     type="button"
+                    onClick={() => setForgotPasswordOpen(true)}
                     className="text-xs text-zinc-500 transition hover:text-[#f36631]"
-                    onClick={() => {
-                      // Forgot-password flow is not implemented in the V1 backend.
-                    }}
                   >
                     Forgot password?
                   </button>
@@ -248,6 +248,12 @@ export default function LoginPage() {
           </div>
         </section>
       </div>
+
+      <ForgotPasswordModal
+        isOpen={forgotPasswordOpen}
+        onClose={() => setForgotPasswordOpen(false)}
+        initialEmail={form.email}
+      />
     </main>
   );
 }
