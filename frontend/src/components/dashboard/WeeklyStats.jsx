@@ -19,7 +19,7 @@ const WeeklyStats = ({ summary }) => {
     <section className="h-full rounded-2xl border border-[#252830] bg-[#111318]/80  p-6">
 
       <div className="">
-        <p className="text-[18px] font-medium text-[#f6f1e8] border-b border-[#252830]">
+        <p className="truncate text-[15px] font-medium text-[#f6f1e8]">
           Weekly stats, progress
         </p>
 

@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import ProjectPage from "./pages/ProjectPage";
+import CompilerPage from "./pages/CompilerPage";
 import Layout from "./layout/layout";
 import Login from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -64,6 +65,14 @@ const App = () => {
           element={
             <NoIndex title="Your code workspace">
               <ProjectPage />
+            </NoIndex>
+          }
+        />
+        <Route
+          path="/compiler"
+          element={
+            <NoIndex title="Online Compiler">
+              <CompilerPage />
             </NoIndex>
           }
         />

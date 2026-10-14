@@ -61,7 +61,7 @@ const ConsistencyHub = ({ summary }) => {
     <section className="h-full min-w-0 overflow-hidden rounded-2xl border border-[#252830] bg-[#111318]/80">
       <div className="flex items-center justify-between gap-3 border-b border-[#252830] px-4 py-3 sm:px-5">
         <div className="flex min-w-0 items-center gap-2">
-          <Flame size={17} className="shrink-0 text-[#f64f12]" fill="currentColor" />
+          
           <p className="truncate text-[15px] font-medium text-[#f6f1e8]">
             Consistency Hub
           </p>
