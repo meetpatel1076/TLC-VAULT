@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
+import ProfileMenu from "./ProfileMenu";
 
 const DiscordIcon = ({ size = 20 }) => (
   <svg
@@ -15,6 +16,10 @@ const DiscordIcon = ({ size = 20 }) => (
 );
 
 const Topbar = ({ collapsed, user, onMenuClick }) => {
+  const [profileOpen, setProfileOpen] = useState(false);
+  const closeProfile = useCallback(() => setProfileOpen(false), []);
+  const initial = (user?.name?.trim()?.[0] || user?.email?.[0] || "U").toUpperCase();
+
   return (
     <header
       className={`
@@ -31,16 +36,12 @@ const Topbar = ({ collapsed, user, onMenuClick }) => {
           type="button"
           onClick={onMenuClick}
           aria-label="Open navigation menu"
-          className="inline-flex md:hidden items-center justify-center rounded-lg p-2 text-[#d1d5db] hover:bg-[#191c22] hover:text-white transition"
+          className="inline-flex md:hidden items-center justify-center rounded-lg p-2 text-[#d1d5db] transition hover:bg-[#191c22] hover:text-white"
         >
           <Menu size={22} />
         </button>
 
-        <Link
-          to="/dashboard"
-          aria-label="TLC Vault dashboard"
-          className="shrink-0"
-        >
+        <Link to="/dashboard" aria-label="TLC Vault dashboard" className="shrink-0">
           <img
             src="/tlc-vault-logo.png"
             alt="TLC Vault"
@@ -50,13 +51,11 @@ const Topbar = ({ collapsed, user, onMenuClick }) => {
       </div>
 
       {/* Center: Brand */}
-      <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-3 pointer-events-none">
+      <div className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 items-center gap-3 md:flex">
         <span className="text-[11px] uppercase tracking-[0.3em] text-[#666b75]">
           The Last Commit
         </span>
-
         <span className="h-1 w-1 rounded-full bg-[#f64f12]" />
-
         <span
           className="text-sm font-medium tracking-[0.12em] text-[#f6f1e8]"
           style={{ fontFamily: "MaskingRenta, sans-serif" }}
@@ -65,32 +64,43 @@ const Topbar = ({ collapsed, user, onMenuClick }) => {
         </span>
       </div>
 
-      {/* Right: Discord and User Avatar */}
+      {/* Right: Discord and User Profile */}
       <div className="flex items-center gap-3">
         <a
           href="https://discord.gg/rtFWb6p9"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Join The Last Commit Discord community"
-          className="
-            inline-flex items-center justify-center gap-2
-            rounded-md bg-[#5865F2] px-3 py-2
-            text-sm font-semibold text-white
-            transition-colors duration-200
-            hover:bg-[#4752C4]
-            focus-visible:outline-none focus-visible:ring-2
-            focus-visible:ring-[#5865F2] focus-visible:ring-offset-2
-            focus-visible:ring-offset-[#181a20]
-          "
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-[#5865F2] px-3 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#4752C4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5865F2] focus-visible:ring-offset-2 focus-visible:ring-offset-[#181a20]"
         >
           <DiscordIcon size={19} />
           <span className="hidden sm:inline">Join Discord</span>
         </a>
 
-        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#292d35] shrink-0">
-          <span className="text-xs text-white">
-            {user?.email?.charAt(0).toUpperCase() || "U"}
-          </span>
+        <div className="relative z-[95]">
+          <button
+            type="button"
+            aria-label="Open profile menu"
+            aria-haspopup="dialog"
+            aria-expanded={profileOpen}
+            onClick={() => setProfileOpen((open) => !open)}
+            className={`group flex h-10 items-center gap-2 rounded-full border p-1 transition ${
+              profileOpen
+                ? "border-[#30343d] bg-white/[0.04]"
+                : "border-transparent hover:border-[#30343d] hover:bg-white/[0.04]"
+            }`}
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#3a3e47] bg-[#292d35] text-xs font-semibold text-white">
+              {initial}
+            </span>
+            <ChevronDown
+              size={14}
+              className={`mr-1 hidden text-[#858b98] transition sm:block ${
+                profileOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+          {profileOpen && <ProfileMenu user={user} onClose={closeProfile} />}
         </div>
       </div>
     </header>
