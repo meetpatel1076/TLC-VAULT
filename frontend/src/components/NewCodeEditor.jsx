@@ -29,14 +29,19 @@ int main() {
     try {
       setSaving(true);
 
-      const response = await api.post(`/repositories/${repoId}/files`, {
+      await api.post(`/repositories/${repoId}/files`, {
         name: fileName,
         language,
         code,
       });
+
+      // Reset the editor after the file has been saved successfully.
+      setCode(`#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << "Hello TLC Vault";\n    return 0;\n}`);
+      setFileName("main.cpp");
+      setLanguage("cpp");
       setIsOpen(false);
 
-      onFileCreated();
+      await onFileCreated?.();
 
     } catch (error) {
       console.error("Failed to save code:", error);
@@ -62,8 +67,9 @@ int main() {
           {isOpen ? <X size={19} /> : <Plus size={19} />}
 
           <span className="font-medium">
-            {isOpen ? "Code Editor" : "Add Code"}
+            {isOpen ? "Code Editor" : "Add Code "}
           </span>
+          <span className="text-gray-500 text-xs sm:text-sm">(paste your code work)</span>
         </button>
 
 

@@ -177,20 +177,20 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
   };
 
   const handleRun = async () => {
-  if (compilerOpen) {
-    setCompilerOpen(false);
-    return;
-  }
+    if (compilerOpen) {
+      setCompilerOpen(false);
+      return;
+    }
 
-  await loadCompilerFile();
+    await loadCompilerFile();
 
-  setTimeout(() => {
-    compilerSectionRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, 300);
-};
+    setTimeout(() => {
+      compilerSectionRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 300);
+  };
 
   const handleCompilerLoad = useCallback(() => {
     const iframeWindow = iframeRef.current?.contentWindow;
@@ -333,10 +333,10 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
       />
 
       {compilerOpen && (
-  <section
-    ref={compilerSectionRef}
-    className="border-t border-[#30343d] bg-[#0b0d11]"
-  >
+        <section
+          ref={compilerSectionRef}
+          className="border-t border-[#30343d] bg-[#0b0d11]"
+        >
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#242832] px-4 py-3">
             <div>
               <div className="flex items-center gap-2 text-sm font-medium text-white">
