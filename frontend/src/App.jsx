@@ -21,6 +21,7 @@ import AdminRepositories from "./pages/AdminRepositoriesPage";
 import AdminCodeFiles from "./pages/AdminCodeFilesPage";
 import AdminLayout from "./layout/AdminLayout";
 import AdminFeedbackPage from "./pages/AdminFeedbackPage";
+import AdminBadgesPage from "./pages/AdminBadgesPage";
 
 const HOME_SCHEMA = {
   "@context": "https://schema.org",
@@ -133,6 +134,7 @@ const App = () => {
           <Route path="repositories" element={<AdminRepositories />} />
           <Route path="codefiles" element={<AdminCodeFiles />} />
           <Route path="/admin/feedback" element={<AdminFeedbackPage />} />
+          <Route path="/admin/badges" element={<AdminBadgesPage />} />
         </Route>
       </Route>
 
