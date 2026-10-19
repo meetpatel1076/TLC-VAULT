@@ -335,38 +335,27 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
       {compilerOpen && (
         <section
           ref={compilerSectionRef}
-          className="border-t border-[#30343d] bg-[#0b0d11]"
+          className="border-t border-[#30343d] bg-black"
         >
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#242832] px-4 py-3">
             <div>
               <div className="flex items-center gap-2 text-sm font-medium text-white">
-                <Play size={15} className="text-orange-300" />
-                OneCompiler
-                <span className="rounded-md border border-[#30343d] px-2 py-0.5 text-[10px] uppercase tracking-wide text-[#9ca3af]">
-                  {compilerFile?.language || file.language}
-                </span>
+
               </div>
-              <p className="mt-1 text-xs text-[#858b98]">
-                Loaded from the selected Monaco editor. Click Update to save any unsaved edits back to TLC Vault.
+              <p className="mt-1 text-lg text-white">
+                Made changes? Click Update above the editor to save them.
               </p>
             </div>
 
             <div className="flex items-center gap-3">
-              <a
-                href="https://onecompiler.com/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-[#9ca3af] transition hover:text-white"
-              >
-                Open OneCompiler <ExternalLink size={13} />
-              </a>
+
               <button
                 type="button"
                 onClick={() => setCompilerOpen(false)}
                 title="Close compiler"
                 className="rounded-md p-1.5 text-[#9ca3af] transition hover:bg-[#191c22] hover:text-white"
               >
-                <X size={16} />
+                <X size={32} />
               </button>
             </div>
           </div>
@@ -403,6 +392,17 @@ const SavedCodeEditor = ({ file, onUpdated, onDeleted }) => {
                 allow="clipboard-read; clipboard-write"
                 loading="eager"
               />
+              <p className="mt-2 text-right text-xs text-zinc-500">
+                Powered by{" "}
+                <a
+                  href="https://onecompiler.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-orange-400 transition-colors"
+                >
+                  OneCompiler
+                </a>
+              </p>
             </div>
           )}
         </section>
