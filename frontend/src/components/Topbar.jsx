@@ -100,7 +100,7 @@ const Topbar = ({ collapsed, user, onMenuClick, standalone = false }) => {
         
 
         <a
-          href="https://discord.gg/rtFWb6p9"
+          href="https://discord.gg/M83dEcZKqk"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Join The Last Commit Discord community"
