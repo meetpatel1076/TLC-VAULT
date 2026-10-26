@@ -7,6 +7,7 @@ import {
   Settings,
   LogOut,
    MessageSquare,
+  Award,
 } from "lucide-react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import HoldButton from "../HoldButton";
@@ -35,10 +36,15 @@ const navigation = [
     icon: FileCode2,
   },
   {
-  label: "Feedback & Issues",
-  path: "/admin/feedback",
-  icon: MessageSquare,
-},
+    label: "Feedback & Issues",
+    path: "/admin/feedback",
+    icon: MessageSquare,
+  },
+  {
+    label: "Badge Activity",
+    path: "/admin/badges",
+    icon: Award,
+  },
 ];
 
 const AdminSidebar = () => {

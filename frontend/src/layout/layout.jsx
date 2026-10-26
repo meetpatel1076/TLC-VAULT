@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import FeedbackModal from "../components/FeedbackModal";
+import BadgeUnlockToast from "../components/dashboard/BadgeUnlockToast";
 import api from "../services/api";
 
 const Layout = () => {
@@ -103,6 +104,8 @@ const Layout = () => {
 
         <Outlet context={{ fetchProjects, user }} />
       </div>
+
+      <BadgeUnlockToast />
 
       <FeedbackModal
         isOpen={feedbackOpen}
