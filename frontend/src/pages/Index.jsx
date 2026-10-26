@@ -187,6 +187,75 @@ function AppWindow() {
   );
 }
 
+
+function CompilerWindow() {
+  const compilerLines = [
+    { number: "1", code: "#include <iostream>", color: "text-[#f36631]" },
+    { number: "2", code: "using namespace std;", color: "text-zinc-400" },
+    { number: "3", code: "", color: "text-zinc-500" },
+    { number: "4", code: "int main() {", color: "text-[#f6f1e8]" },
+    { number: "5", code: '  cout << "Hello, world!";', color: "text-emerald-300" },
+    { number: "6", code: "  return 0;", color: "text-zinc-400" },
+    { number: "7", code: "}", color: "text-[#f6f1e8]" },
+  ];
+
+  return (
+    <div className="relative w-full overflow-hidden rounded-[14px] border border-zinc-800 bg-[#111214] shadow-[0_20px_55px_rgba(0,0,0,0.28)]">
+      <div className="flex h-9 items-center justify-between border-b border-zinc-800 px-3 sm:px-4">
+        <div className="flex min-w-0 items-center gap-2">
+          <Terminal size={13} className="shrink-0 text-[#f36631]" strokeWidth={1.7} />
+          <span className="text-[10px] font-medium text-zinc-300">TLC Compiler</span>
+          <span className="hidden text-[9px] text-zinc-700 sm:inline">/</span>
+          <span className="hidden text-[9px] text-zinc-600 sm:inline">main.cpp</span>
+        </div>
+        <span className="rounded border border-zinc-800 px-2 py-1 text-[8px] text-zinc-500">C++</span>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-[1.2fr_0.8fr]">
+        <div className="min-w-0 border-b border-zinc-800 sm:border-b-0 sm:border-r">
+          <div className="flex h-8 items-center justify-between border-b border-zinc-800 px-3">
+            <span className="text-[8px] uppercase tracking-[0.15em] text-zinc-600">Editor</span>
+            <span className="text-[8px] text-zinc-700">main.cpp</span>
+          </div>
+          <div className="grid grid-cols-[18px_minmax(0,1fr)] gap-2 overflow-hidden px-3 py-3 font-mono text-[8px] leading-[1.65] sm:text-[9px]">
+            <div className="select-none text-right text-zinc-700">
+              {compilerLines.map((line) => <div key={line.number}>{line.number}</div>)}
+            </div>
+            <div className="min-w-0 overflow-hidden">
+              {compilerLines.map((line) => (
+                <div key={line.number} className={`truncate ${line.color}`}>
+                  {line.code || "\u00a0"}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="min-w-0 bg-[#0d0e10]">
+          <div className="flex h-8 items-center justify-between border-b border-zinc-800 px-3">
+            <span className="text-[8px] uppercase tracking-[0.15em] text-zinc-600">Output</span>
+            <span className="flex items-center gap-1.5 text-[8px] text-emerald-500">
+              <span className="h-1 w-1 rounded-full bg-emerald-500" /> Ready
+            </span>
+          </div>
+          <div className="min-h-[95px] px-3 py-3 font-mono text-[9px] leading-5">
+            <div className="text-zinc-700">$ ./main</div>
+            <div className="mt-1 text-zinc-300">Hello, world!</div>
+            <div className="mt-3 text-zinc-700">Process finished</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between gap-3 border-t border-zinc-800 px-3 py-2.5 sm:px-4">
+        <span className="text-[8px] text-zinc-600">Write · Run · Check output</span>
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-[#f36631] px-3 py-1.5 text-[9px] font-semibold text-zinc-950">
+          <span className="h-1.5 w-1.5 rounded-full bg-zinc-950" /> Run code
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function LandingPage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#0e1015] text-[#f6f1e8]">
@@ -303,6 +372,15 @@ export default function LandingPage() {
                 />
               </Link>
 
+              <Link
+                to="/compiler"
+                className="group flex items-center gap-2 rounded-full border border-zinc-700 px-4 py-3 text-sm font-medium text-[#f6f1e8] transition hover:border-[#f36631] hover:text-[#f36631]"
+              >
+                <Terminal size={14} strokeWidth={1.7} />
+                Use Compiler
+                <ArrowRight size={13} strokeWidth={1.8} className="transition-transform group-hover:translate-x-0.5" />
+              </Link>
+
               <a
                 href="#why"
                 className="flex items-center gap-2 px-2 py-2 text-xs text-zinc-600 transition hover:text-[#f6f1e8]"
@@ -335,19 +413,39 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* RIGHT — PRODUCT PREVIEW */}
-          <div className="relative lg:-mt-2">
-            <AppWindow />
+          {/* RIGHT — PRODUCT + COMPILER PREVIEWS */}
+          <div className="relative flex min-w-0 flex-col gap-6 lg:-mt-40">
+            <div>
+              <AppWindow />
+              <div className="mt-3 flex items-center justify-between px-1">
+                <span className="text-[8px] uppercase tracking-[0.18em] text-zinc-800">
+                  Your practice space
+                </span>
+                <span className="text-[8px] text-zinc-700">
+                  available anywhere
+                </span>
+              </div>
+            </div>
 
-            {/* tiny contextual label */}
-            <div className="mt-3 flex items-center justify-between px-1">
-              <span className="text-[8px] uppercase tracking-[0.18em] text-zinc-800">
-                Your practice space
-              </span>
-
-              <span className="text-[8px] text-zinc-700">
-                available anywhere
-              </span>
+            <div>
+              <div className="mb-2 flex items-center justify-between px-1">
+                <span className="text-[9px] uppercase tracking-[0.18em] text-zinc-500">
+                  Also inside TLC Vault
+                </span>
+                <span className="flex items-center gap-1.5 text-[8px] text-zinc-600">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#f36631]" />
+                  Online compiler
+                </span>
+              </div>
+              <CompilerWindow />
+              <div className="mt-3 flex items-center justify-between gap-3 px-1">
+                <span className="text-[8px] text-zinc-700">
+                  Try supported languages in your browser
+                </span>
+                <Link to="/compiler" className="inline-flex shrink-0 items-center gap-1.5 text-[9px] font-medium text-[#f36631] transition hover:text-[#ff875b]">
+                  Open compiler <ArrowRight size={11} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -672,7 +770,7 @@ export default function LandingPage() {
 
       {/* FINAL CTA */}
       <section className="relative z-10 px-5 pb-8 pt-8 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-7xl overflow-hidden bg-[#f36631]">
+        <div className="mx-auto max-w-7xl overflow-hidden bg-[#f36631] rounded-2xl">
           <div className="relative px-6 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20">
             {/* restrained graphic */}
             <div className="pointer-events-none absolute right-[-5%] top-1/2 hidden h-72 w-72 -translate-y-1/2 rounded-full border border-zinc-950/10 md:block" />
