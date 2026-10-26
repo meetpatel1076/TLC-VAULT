@@ -16,6 +16,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import SlideCommit from "./SlideCommit";
 import api from "../services/api";
 import CreateProject from "./CreateProject";
+import SearchCodeFiles from "./SearchCodeFiles";
 
 const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user, isMobileDrawer = false, mobileOpen = false, onMobileClose, onFeedbackClick, }) => {
   const location = useLocation();
@@ -170,6 +171,16 @@ const Sidebar = ({ collapsed, setCollapsed, projects, fetchProjects, user, isMob
           />
         </div>
       </div>
+
+      {/* Search saved code files */}
+      {!collapsed && (
+        <div className="shrink-0 px-5 pt-4">
+          <SearchCodeFiles
+            projects={projects}
+            onNavigate={isMobileDrawer ? onMobileClose : undefined}
+          />
+        </div>
+      )}
 
       {/* Repositories */}
       <div
