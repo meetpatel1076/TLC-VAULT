@@ -99,6 +99,7 @@ const Layout = () => {
         <Topbar
           collapsed={collapsed}
           user={user}
+          onUserUpdated={(updatedUser) => setUser((currentUser) => ({ ...currentUser, ...updatedUser }))}
           onMenuClick={() => setMobileMenuOpen(true)}
         />
 

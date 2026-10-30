@@ -33,7 +33,7 @@ const InstagramIcon = ({ size = 19 }) => (
   </svg>
 );
 
-const Topbar = ({ collapsed, user, onMenuClick, standalone = false }) => {
+const Topbar = ({ collapsed, user, onMenuClick, onUserUpdated, standalone = false }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const closeProfile = useCallback(() => setProfileOpen(false), []);
   const initial = (user?.name?.trim()?.[0] || user?.email?.[0] || "U").toUpperCase();
@@ -145,7 +145,7 @@ const Topbar = ({ collapsed, user, onMenuClick, standalone = false }) => {
               }`}
             />
           </button>
-          {profileOpen && <ProfileMenu user={user} onClose={closeProfile} />}
+          {profileOpen && <ProfileMenu user={user} onClose={closeProfile} onUserUpdated={onUserUpdated} />}
         </div>
       </div>
     </header>
