@@ -72,9 +72,7 @@ const App = () => {
         <Route
           path="/compiler"
           element={
-            <NoIndex title="Online Compiler">
               <CompilerPage />
-            </NoIndex>
           }
         />
       </Route>
